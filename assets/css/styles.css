@@ -1,0 +1,267 @@
+/* ==========================================================================
+   Xporus International — UI/UX Pro Max Design System & 3D Flip-Card Styles
+   Archetype: Swiss Corporate Minimalism + Atmospheric Glassmorphism
+   Brand Palette: Sapphire Blue (#2563EB), Cobalt (#1D4ED8), Midnight (#0B132B)
+   Typography: Montserrat (Headings & Body)
+   ========================================================================== */
+
+:root {
+  --brand-primary: #2563EB;
+  --brand-dark: #1D4ED8;
+  --brand-navy: #1E3A8A;
+  --brand-ice: #EFF6FF;
+  --surface-midnight: #0B132B;
+  --text-obsidian: #0F172A;
+  --text-slate: #475569;
+  --border-subtle: #E2E8F0;
+}
+
+html, body {
+  scroll-behavior: smooth;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  color: var(--text-obsidian);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Indel Money Style Typography Hierarchy:
+   - Main Headings (h1, h2): Clean Regular (400) with SemiBold (600) accent highlights
+   - Subheadings & Card Titles (h3, h4): Crisp SemiBold (600)
+   - Body Copy (p, li): Clean Regular (400) with comfortable line height
+   - Kickers / Buttons / Nav: Medium (500) */
+h1, h2 {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400 !important;
+  letter-spacing: -0.015em;
+}
+
+h1 .heading-accent,
+h2 .heading-accent {
+  font-weight: 600 !important;
+  color: var(--brand-primary);
+}
+
+h3, h4, h5, h6 {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em;
+}
+
+p, li, dd, blockquote, input, textarea, select {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400 !important;
+  line-height: 1.68;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* UI/UX Pro Max Atmospheric Hero Mesh + Subtle Architectural Grid */
+.hero-gradient {
+  background-color: #FFFFFF;
+  background-image:
+    radial-gradient(circle at 82% 18%, rgba(37, 99, 235, 0.10) 0%, rgba(239, 246, 255, 0.45) 42%, transparent 70%),
+    radial-gradient(circle at 12% 80%, rgba(29, 78, 216, 0.05) 0%, transparent 50%),
+    linear-gradient(to right, rgba(226, 232, 240, 0.35) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.35) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+}
+
+/* Sticky Header Glassmorphism */
+.navbar-scrolled {
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 24px -4px rgba(15, 23, 42, 0.06);
+}
+
+/* Glassmorphic Floating Badges on Hero Images */
+.glass-badge {
+  background: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.14);
+}
+
+/* ==========================================================================
+   Medoc Sourcing Style 3D Flip-Box Cards (Product Categories — Pro Max Physics)
+   ========================================================================== */
+.flip-card {
+  perspective: 1400px;
+  height: 280px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.68s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+  border-radius: 1rem;
+}
+
+.flip-card:hover .flip-card-inner,
+.flip-card.is-flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.flip-card-front {
+  background-color: #1E3A8A;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.flip-card-front img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.flip-card:hover .flip-card-front img {
+  transform: scale(1.08);
+}
+
+/* Sapphire Blue Translucent Overlay on Front (Medoc Style) */
+.flip-card-front-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.38) 0%,
+    rgba(30, 58, 138, 0.62) 50%,
+    rgba(29, 78, 216, 0.80) 100%
+  );
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+
+.flip-card-back {
+  background: linear-gradient(145deg, #0B132B 0%, #1E3A8A 48%, #2563EB 100%);
+  color: #FFFFFF;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  padding: 1.35rem 1.5rem;
+  box-shadow: 0 22px 36px -10px rgba(29, 78, 216, 0.38);
+  border: 1px solid rgba(147, 197, 253, 0.28);
+}
+
+/* Pro Max Service Card Hover Physics & Top Accent Bar */
+.service-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2563EB, #60A5FA);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 40px -12px rgba(37, 99, 235, 0.14), 0 4px 12px -2px rgba(15, 23, 42, 0.05);
+  border-color: rgba(37, 99, 235, 0.35);
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Executive Team Card */
+.team-card {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 34px -10px rgba(15, 23, 42, 0.11);
+  border-color: #93C5FD;
+}
+
+.team-card img {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.team-card:hover img {
+  transform: scale(1.04);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Modal Animation */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-animate {
+  animation: modalFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
