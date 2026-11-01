@@ -4,7 +4,7 @@
  * using Browser Storage + Real-Time Cross-Tab Events (Zero PHP/Server required).
  */
 
-const STORAGE_KEY = 'xporus_international_cms_v1';
+const STORAGE_KEY = 'xporus_international_cms_v2';
 
 const DEFAULT_CMS_DATA = {
   settings: {
@@ -69,10 +69,10 @@ const DEFAULT_CMS_DATA = {
       id: 'srv-5',
       title: 'Quality Assurance',
       shortDesc: 'Product inspection, compliance verification, and standard maintenance.',
-      fullDesc: 'At Xporus International, quality is non-negotiable. Our on-ground QA engineers conduct rigorous inline, mid-production, and AQL 2.5 pre-shipment inspections alongside lab testing.',
+      fullDesc: 'At Xporus International, quality is non-negotiable. Our on-ground QA engineers conduct rigorous inline, mid-production, and pre-shipment quality inspections alongside thorough product testing.',
       icon: 'shield-check',
       caseStudy: 'Identified and rectified finish defects during inline inspection for a 12,000-unit US furniture & lighting order, ensuring 100% defect-free on-time delivery.',
-      deliverables: ['AQL 2.5 Pre-Shipment Inspections', 'GOTS, FSC & ISO Compliance Checks', 'Inline Factory Floor Audits', 'Lab Safety & Durability Testing']
+      deliverables: ['Pre-Shipment Quality Inspections', 'Production Standard Verification', 'Inline Factory Floor Audits', 'Safety & Durability Testing']
     },
     {
       id: 'srv-6',
@@ -108,7 +108,7 @@ const DEFAULT_CMS_DATA = {
       group: 'textiles',
       featured: true,
       image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80',
-      subcategories: ['Bed Linen & Duvet Sets', 'Home Linen & Throws', 'Table Linen & Runners', 'Kitchen Linen', 'GOTS Certified Organic Cotton']
+      subcategories: ['Bed Linen & Duvet Sets', 'Home Linen & Throws', 'Table Linen & Runners', 'Kitchen Linen', 'Organic Cotton Collections']
     },
     {
       id: 'cat-4',
@@ -209,7 +209,7 @@ const DEFAULT_CMS_DATA = {
       role: 'Co-Founder',
       badge: 'Executive',
       specialty: 'Product Development & Quality Assurance',
-      bio: 'Oversees custom prototyping, material engineering, and multi-stage AQL quality control inspections across India.',
+      bio: 'Oversees custom prototyping, material engineering, and multi-stage quality control inspections across India.',
       image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=500&q=80'
     },
     {
@@ -241,7 +241,7 @@ const DEFAULT_CMS_DATA = {
       company: 'Studio Commaniago (Netherlands)',
       country: 'Netherlands',
       rating: 5,
-      quote: 'My European retail customers demand only high-end quality production and strict traceability. I feel completely reassured knowing that Xporus International’s impeccable processes, factory controls, and checks ensure full GOTS compliance across every single shipment.',
+      quote: 'My European retail customers demand only high-end quality production and strict traceability. I feel completely reassured knowing that Xporus International’s impeccable processes, factory controls, and checks ensure consistent excellence across every single shipment.',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'
     },
     {
@@ -284,8 +284,8 @@ const DEFAULT_CMS_DATA = {
       email: 'sophie@maisonlaurent.fr',
       phone: '+33 1 42 68 55 10',
       company: 'Maison Laurent Paris',
-      interest: 'Home Textiles & GOTS Linen',
-      message: 'We require GOTS-certified organic cotton bedding and embroidered cushion covers with custom private label packaging.',
+      interest: 'Home Textiles & Linen',
+      message: 'We require organic cotton bedding and embroidered cushion covers with custom private label packaging.',
       status: 'In Progress',
       createdAt: '2026-10-28 11:05'
     },
@@ -296,7 +296,7 @@ const DEFAULT_CMS_DATA = {
       phone: '+46 8 501 234 56',
       company: 'Nordic Decor AB',
       interest: 'Quality Assurance & Factory Audit',
-      message: 'Need pre-shipment AQL 2.5 inspection and factory compliance audit for our upcoming shipment in Jodhpur and Moradabad.',
+      message: 'Need pre-shipment quality inspection and factory audit for our upcoming shipment in Jodhpur and Moradabad.',
       status: 'Quoted',
       createdAt: '2026-10-26 16:45'
     }

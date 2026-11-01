@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Listen for real-time updates from Admin Panel across tabs
   window.addEventListener('storage', (e) => {
-    if (e.key === 'xporus_international_cms_v1') {
+    if (e.key === 'xporus_international_cms_v2') {
       cmsData = window.XporusStore.getData();
       renderAllSections();
     }
