@@ -179,7 +179,11 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
 
           <h3 class="text-xl font-bold text-slate-900 font-heading mb-2.5 group-hover:text-blue-600 transition-colors">
-            ${escapeHtml(srv.title)}
+            ${
+              srv.id === 'srv-1'
+                ? `<a href="service-consultancy.html" class="hover:underline">${escapeHtml(srv.title)}</a>`
+                : escapeHtml(srv.title)
+            }
           </h3>
           <p class="text-slate-600 text-sm leading-relaxed mb-4">
             ${escapeHtml(srv.shortDesc)}
@@ -202,14 +206,24 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
 
         <div class="pt-3.5 border-t border-slate-100 flex items-center justify-between">
-          <button
-            type="button"
-            data-service-id="${escapeHtml(srv.id)}"
-            class="open-service-modal inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors"
-          >
-            <span>Learn More</span>
-            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
-          </button>
+          ${
+            srv.id === 'srv-1'
+              ? `<a
+                  href="service-consultancy.html"
+                  class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors"
+                >
+                  <span>Learn More</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                </a>`
+              : `<button
+                  type="button"
+                  data-service-id="${escapeHtml(srv.id)}"
+                  class="open-service-modal inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors"
+                >
+                  <span>Learn More</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                </button>`
+          }
           <button
             type="button"
             data-inquire-interest="Service: ${escapeHtml(srv.title)}"
