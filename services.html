@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary SEO Meta Tags -->
+  <title>Our Core Services | Xporus International — 360º Global Sourcing, QA & Supply Chain</title>
+  <meta name="title" content="Our Core Services | Xporus International — 360º Global Sourcing, QA & Supply Chain" />
+  <meta name="description" content="Explore Xporus International's 6 core services: Consultancy & Product Development, Business Advisory & Compliance Audits, Export-Import & Merchandising, Market Research, 3-Stage Quality Assurance, and Door-to-Door Logistics." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://xporusinternational.com/services.html" />
+
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+            heading: ['Montserrat', 'sans-serif']
+          },
+          fontWeight: {
+            thin: '300',
+            extralight: '300',
+            light: '300',
+            normal: '400',
+            medium: '500',
+            semibold: '600',
+            bold: '600',
+            extrabold: '600',
+            black: '600'
+          },
+          colors: {
+            brand: {
+              50: '#EFF6FF',
+              100: '#DBEAFE',
+              500: '#3B82F6',
+              600: '#2563EB',
+              700: '#1D4ED8',
+              800: '#1E40AF',
+              900: '#1E3A8A',
+              midnight: '#0B132B'
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-white text-slate-900 antialiased selection:bg-blue-600 selection:text-white overflow-x-hidden">
+
+  <!-- ========================================================================
+       1. TOP STICKY HEADER / NAVBAR
+       ======================================================================== -->
+  <header id="site-header" class="sticky top-0 z-50 bg-white/95 border-b border-slate-200/80 transition-all duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-3 focus:outline-none group" aria-label="Xporus International Home">
+        <img
+          src="assets/images/xporus_logo.png"
+          alt="Xporus International Logo"
+          class="h-10 sm:h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+          width="190"
+          height="44"
+        />
+      </a>
+
+      <!-- Center Desktop Navigation -->
+      <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-700" aria-label="Main Navigation">
+        <a href="index.html#home" class="hover:text-blue-600 transition-colors py-1">Home</a>
+        <a href="about.html" class="hover:text-blue-600 transition-colors py-1">About Us</a>
+        <a href="services.html" class="text-blue-600 font-semibold border-b-2 border-blue-600 py-1">Services</a>
+        <a href="index.html#products" class="hover:text-blue-600 transition-colors py-1">Products</a>
+        <a href="index.html#team" class="hover:text-blue-600 transition-colors py-1">Our Team</a>
+        <a href="index.html#testimonials" class="hover:text-blue-600 transition-colors py-1">Testimonials</a>
+        <a href="contact.html" class="hover:text-blue-600 transition-colors py-1">Contact Us</a>
+      </nav>
+
+      <!-- Right Action Buttons -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a
+          href="admin.html"
+          class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-blue-50/70 transition-colors border border-transparent hover:border-blue-100"
+          title="Open Xporus CMS Admin Panel"
+        >
+          <i data-lucide="layout-dashboard" class="w-3.5 h-3.5 text-blue-600"></i>
+          <span>Admin Panel</span>
+        </a>
+        <button
+          type="button"
+          class="open-quote-modal-btn inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-sm font-semibold shadow-sm shadow-blue-600/20 transition-all"
+        >
+          Get a Quote
+        </button>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button
+        id="mobile-menu-btn"
+        type="button"
+        class="lg:hidden inline-flex items-center justify-center p-2.5 rounded-xl text-slate-700 hover:bg-slate-100 focus:outline-none"
+        aria-label="Toggle Menu"
+      >
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-2">
+      <a href="index.html#home" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Home</a>
+      <a href="about.html" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">About Us</a>
+      <a href="services.html" class="block px-3 py-2 rounded-lg text-sm font-semibold text-blue-600 bg-blue-50">Services</a>
+      <a href="index.html#products" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Products</a>
+      <a href="index.html#team" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Our Team</a>
+      <a href="index.html#testimonials" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Testimonials</a>
+      <a href="contact.html" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Contact Us</a>
+      <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
+        <button
+          type="button"
+          class="open-quote-modal-btn w-full py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold text-center"
+        >
+          Get a Quote
+        </button>
+        <a
+          href="admin.html"
+          class="w-full py-2 rounded-xl border border-slate-200 text-slate-700 text-xs font-semibold text-center flex items-center justify-center gap-1.5"
+        >
+          <i data-lucide="settings" class="w-3.5 h-3.5 text-blue-600"></i>
+          <span>Open Admin Panel</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ======================================================================
+         2. MINIMAL & CLEAN HERO HEADER BANNER (v2 Design)
+         ====================================================================== -->
+    <section class="py-12 lg:py-16 bg-white border-b border-slate-100">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
+        <span class="inline-flex items-center px-3.5 py-1 rounded-full text-xs font-medium uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-200">
+          OUR EXPERTISE
+        </span>
+        <h1 class="text-3xl sm:text-5xl font-normal text-slate-900 font-heading tracking-tight">
+          Our Core <span class="heading-accent">Services</span>
+        </h1>
+        <p class="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto">
+          Comprehensive 360º global sourcing, quality assurance, and supply chain solutions.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. ALL 6 SERVICES SEQUENTIAL ZIG-ZAG SHOWCASE (1 Service Per Full Row)
+         ====================================================================== -->
+    <section class="pb-16 lg:pb-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="border border-slate-200/90 rounded-2xl overflow-hidden shadow-sm divide-y divide-slate-200/90 bg-white">
+
+          <!-- ================================================================
+               SERVICE 01: CONSULTANCY SERVICE & PRODUCT DEVELOPMENT
+               (Image Left | Detailed Content Right)
+               ================================================================ -->
+          <article id="service-1" class="grid grid-cols-1 lg:grid-cols-12 items-stretch scroll-mt-24">
+            <div class="lg:col-span-6 bg-slate-100 min-h-[280px] sm:min-h-[340px] relative overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1000&q=85"
+                alt="01. Consultancy Service & Product Development — Xporus International"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div class="lg:col-span-6 p-7 sm:p-10 lg:p-12 flex flex-col justify-center space-y-4">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800 tabular-nums shrink-0">
+                  01
+                </span>
+                <h2 class="text-xl sm:text-2xl font-semibold text-slate-900 font-heading">
+                  Consultancy Service &amp; Product Development
+                </h2>
+              </div>
+
+              <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                We provide strategic business advice, sourcing roadmaps, and supplier portfolio optimization across 50+ factories in India. Through our dedicated <strong class="font-semibold text-slate-800">Design &amp; Development</strong> team, we also provide complete end-to-end support to move your chosen product concepts from initial design sketches and material sampling into full container-scale production.
+              </p>
+
+              <!-- Deliverable Pills -->
+              <div class="flex flex-wrap items-center gap-2 pt-1">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200/80">
+                  Deliverables:
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Strategic Sourcing Roadmap
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Design &amp; Full Development
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Supplier Portfolio Optimization
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Cost-Benefit Restructuring
+                </span>
+              </div>
+
+              <div class="pt-2">
+                <button
+                  type="button"
+                  data-interest="Service: Consultancy Service"
+                  class="open-quote-modal-btn inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-sm shadow-blue-600/20 transition-all"
+                >
+                  <span>Request Service Quote</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- ================================================================
+               SERVICE 02: BUSINESS ADVISORY & COMPLIANCE AUDITS
+               (Detailed Content Left | Image Right)
+               ================================================================ -->
+          <article id="service-2" class="grid grid-cols-1 lg:grid-cols-12 items-stretch scroll-mt-24">
+            <div class="lg:col-span-6 p-7 sm:p-10 lg:p-12 flex flex-col justify-center space-y-4 order-2 lg:order-1">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800 tabular-nums shrink-0">
+                  02
+                </span>
+                <h2 class="text-xl sm:text-2xl font-semibold text-slate-900 font-heading">
+                  Business Advisory &amp; Compliance Audits
+                </h2>
+              </div>
+
+              <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                Our advisory practice delivers financial forecasting, risk management, and operational efficiency for international buyers. Under <strong class="font-semibold text-slate-800">Compliance Audits</strong>, we promote global standards for social accountability and environmental practices in India—working alongside the Government of India and its member bodies to help exporters achieve certification in <strong class="font-semibold text-slate-800">Global Best Practices (GBP)</strong>.
+              </p>
+
+              <!-- Deliverable Pills -->
+              <div class="flex flex-wrap items-center gap-2 pt-1">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200/80">
+                  Deliverables:
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Global Best Practices (GBP)
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Social &amp; Environmental Audits
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Financial &amp; Margin Forecasting
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Supply Chain Risk Mitigation
+                </span>
+              </div>
+
+              <div class="pt-2">
+                <button
+                  type="button"
+                  data-interest="Service: Business Advisory"
+                  class="open-quote-modal-btn inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-sm shadow-blue-600/20 transition-all"
+                >
+                  <span>Request Service Quote</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+            <div class="lg:col-span-6 bg-slate-100 min-h-[280px] sm:min-h-[340px] relative overflow-hidden order-1 lg:order-2">
+              <img
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=85"
+                alt="02. Business Advisory & Factory Compliance Audits — Xporus International"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </article>
+
+          <!-- ================================================================
+               SERVICE 03: EXPORT & IMPORT SERVICES & MERCHANDISING
+               (Image Left | Detailed Content Right)
+               ================================================================ -->
+          <article id="service-3" class="grid grid-cols-1 lg:grid-cols-12 items-stretch scroll-mt-24">
+            <div class="lg:col-span-6 bg-slate-100 min-h-[280px] sm:min-h-[340px] relative overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1000&q=85"
+                alt="03. Export & Import Services & Merchandising — Xporus International"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div class="lg:col-span-6 p-7 sm:p-10 lg:p-12 flex flex-col justify-center space-y-4">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800 tabular-nums shrink-0">
+                  03
+                </span>
+                <h2 class="text-xl sm:text-2xl font-semibold text-slate-900 font-heading">
+                  Export &amp; Import Services &amp; Merchandising
+                </h2>
+              </div>
+
+              <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                Our merchandisers source products to your exact specifications. Every project is assigned a <strong class="font-semibold text-slate-800">dedicated two-member team</strong> to maintain continuous communication and follow-ups between buyers and factories. Combined with proactive <strong class="font-semibold text-slate-800">Order Management</strong>, we provide regular updates throughout the entire production process along with customs clearance and trade compliance.
+              </p>
+
+              <!-- Deliverable Pills -->
+              <div class="flex flex-wrap items-center gap-2 pt-1">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200/80">
+                  Deliverables:
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Dedicated 2-Member Merchandising Team
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Live Order Management Updates
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Customs &amp; Export Documentation
+                </span>
+              </div>
+
+              <div class="pt-2">
+                <button
+                  type="button"
+                  data-interest="Service: Export & Import Services"
+                  class="open-quote-modal-btn inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-sm shadow-blue-600/20 transition-all"
+                >
+                  <span>Request Service Quote</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- ================================================================
+               SERVICE 04: MARKET RESEARCH & ANALYTICS
+               (Detailed Content Left | Image Right)
+               ================================================================ -->
+          <article id="service-4" class="grid grid-cols-1 lg:grid-cols-12 items-stretch scroll-mt-24">
+            <div class="lg:col-span-6 p-7 sm:p-10 lg:p-12 flex flex-col justify-center space-y-4 order-2 lg:order-1">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800 tabular-nums shrink-0">
+                  04
+                </span>
+                <h2 class="text-xl sm:text-2xl font-semibold text-slate-900 font-heading">
+                  Market Research &amp; Analytics
+                </h2>
+              </div>
+
+              <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                Deep-dive target market analysis, competitor price benchmarking, and global consumer trend forecasting. Operating across <strong class="font-semibold text-slate-800">4 regional offices in key Indian production cities</strong>, our specialists map raw material availability, artisanal craft clusters, and factory capabilities to keep your seasonal collections ahead of market demand.
+              </p>
+
+              <!-- Deliverable Pills -->
+              <div class="flex flex-wrap items-center gap-2 pt-1">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200/80">
+                  Deliverables:
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Competitor Price Benchmarking
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Artisanal &amp; Material Cluster Mapping
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Seasonal Consumer Trend Reports
+                </span>
+              </div>
+
+              <div class="pt-2">
+                <button
+                  type="button"
+                  data-interest="Service: Market Research"
+                  class="open-quote-modal-btn inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-sm shadow-blue-600/20 transition-all"
+                >
+                  <span>Request Service Quote</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+            <div class="lg:col-span-6 bg-slate-100 min-h-[280px] sm:min-h-[340px] relative overflow-hidden order-1 lg:order-2">
+              <img
+                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=85"
+                alt="04. Market Research & Trend Analytics — Xporus International"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </article>
+
+          <!-- ================================================================
+               SERVICE 05: QUALITY ASSURANCE (3-STAGE INSPECTIONS)
+               (Image Left | Detailed Content Right)
+               ================================================================ -->
+          <article id="service-5" class="grid grid-cols-1 lg:grid-cols-12 items-stretch scroll-mt-24">
+            <div class="lg:col-span-6 bg-slate-100 min-h-[280px] sm:min-h-[340px] relative overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=85"
+                alt="05. Quality Assurance 3-Stage Inspections — Xporus International"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div class="lg:col-span-6 p-7 sm:p-10 lg:p-12 flex flex-col justify-center space-y-4">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800 tabular-nums shrink-0">
+                  05
+                </span>
+                <h2 class="text-xl sm:text-2xl font-semibold text-slate-900 font-heading">
+                  Quality Assurance (3-Stage Inspections)
+                </h2>
+              </div>
+
+              <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                Our QA team averages over <strong class="font-semibold text-slate-800">10 years of trade experience</strong>. We establish pre-production checklists with factory supervisory teams and conduct a <strong class="font-semibold text-slate-800">minimum of three inspection stages</strong> (Pre-Production, Inline, and Pre-Shipment) for all shipments. Our expertise includes production planning, forecasting, vendor evaluation, and social compliance and packaging audits.
+              </p>
+
+              <!-- Deliverable Pills -->
+              <div class="flex flex-wrap items-center gap-2 pt-1">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200/80">
+                  Deliverables:
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Minimum 3 Inspection Stages
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Pre-Production Checklists
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Vendor Evaluation &amp; Packaging Audits
+                </span>
+              </div>
+
+              <div class="pt-2">
+                <button
+                  type="button"
+                  data-interest="Service: Quality Assurance"
+                  class="open-quote-modal-btn inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-sm shadow-blue-600/20 transition-all"
+                >
+                  <span>Request Service Quote</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- ================================================================
+               SERVICE 06: LOGISTICS MANAGEMENT (DOOR-TO-DOOR)
+               (Detailed Content Left | Image Right)
+               ================================================================ -->
+          <article id="service-6" class="grid grid-cols-1 lg:grid-cols-12 items-stretch scroll-mt-24">
+            <div class="lg:col-span-6 p-7 sm:p-10 lg:p-12 flex flex-col justify-center space-y-4 order-2 lg:order-1">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800 tabular-nums shrink-0">
+                  06
+                </span>
+                <h2 class="text-xl sm:text-2xl font-semibold text-slate-900 font-heading">
+                  Logistics Management (Door-to-Door)
+                </h2>
+              </div>
+
+              <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                We handle consolidation planning, export documentation, and real-time cargo tracking through to final delivery. Backed by a production capacity exceeding <strong class="font-semibold text-slate-800">100+ containers per month</strong> across 50+ factories, we operate as a <strong class="font-semibold text-slate-800">vertically integrated company</strong> managing the complete process from factory shipping to final door delivery.
+              </p>
+
+              <!-- Deliverable Pills -->
+              <div class="flex flex-wrap items-center gap-2 pt-1">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200/80">
+                  Deliverables:
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Multi-Cluster Consolidation Planning
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Documentation &amp; Cargo Tracking
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  Vertically Integrated Door Delivery
+                </span>
+              </div>
+
+              <div class="pt-2">
+                <button
+                  type="button"
+                  data-interest="Service: Logistics Management"
+                  class="open-quote-modal-btn inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-sm shadow-blue-600/20 transition-all"
+                >
+                  <span>Request Service Quote</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+            <div class="lg:col-span-6 bg-slate-100 min-h-[280px] sm:min-h-[340px] relative overflow-hidden order-1 lg:order-2">
+              <img
+                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=85"
+                alt="06. Vertically Integrated Container Logistics — Xporus International"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         4. OUR END-TO-END EXECUTION WORKFLOW (Dark Midnight Navy Strip)
+         ====================================================================== -->
+    <section class="py-16 lg:py-20 bg-brand-midnight text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <h2 class="text-2xl sm:text-3xl font-normal text-white font-heading">
+            Our End-to-End <span class="text-blue-400 font-semibold">Execution Workflow</span>
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <!-- Step 01 -->
+          <div class="bg-white text-slate-900 rounded-2xl p-6 shadow-md flex flex-col justify-between">
+            <div>
+              <span class="text-2xl font-semibold text-blue-600 block mb-2 tabular-nums">01</span>
+              <h3 class="text-base font-semibold text-slate-900 mb-1.5">Concept &amp; Design</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Moving your product concepts from design sketches into engineered samples and accurate costing.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 02 -->
+          <div class="bg-white text-slate-900 rounded-2xl p-6 shadow-md flex flex-col justify-between">
+            <div>
+              <span class="text-2xl font-semibold text-blue-600 block mb-2 tabular-nums">02</span>
+              <h3 class="text-base font-semibold text-slate-900 mb-1.5">Merchandising &amp; Production</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Dedicated 2-member merchandising team managing factory schedules and live order updates.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 03 -->
+          <div class="bg-white text-slate-900 rounded-2xl p-6 shadow-md flex flex-col justify-between">
+            <div>
+              <span class="text-2xl font-semibold text-blue-600 block mb-2 tabular-nums">03</span>
+              <h3 class="text-base font-semibold text-slate-900 mb-1.5">3-Stage QA Inspection</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Pre-production checklists, inline factory floor checks, and rigorous pre-shipment inspections.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 04 -->
+          <div class="bg-white text-slate-900 rounded-2xl p-6 shadow-md flex flex-col justify-between">
+            <div>
+              <span class="text-2xl font-semibold text-blue-600 block mb-2 tabular-nums">04</span>
+              <h3 class="text-base font-semibold text-slate-900 mb-1.5">Consolidation &amp; Door Delivery</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Multi-factory container consolidation, customs documentation, and cargo tracking to your door.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. BOTTOM CALL-TO-ACTION BANNER (Ice-Blue Card)
+         ====================================================================== -->
+    <section class="py-16 bg-brand-midnight border-t border-slate-800/80">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-blue-50 border border-blue-200 rounded-2xl p-8 sm:p-12 text-center space-y-5 shadow-lg">
+          <h2 class="text-2xl sm:text-3xl font-normal text-slate-900 font-heading">
+            Ready to Elevate Your <span class="heading-accent">Global Sourcing?</span>
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto">
+            Partner with our 100+ experienced QA/technical staff, merchandisers, and facilitators across 4 regional offices in India.
+          </p>
+          <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+            <button
+              type="button"
+              class="open-quote-modal-btn inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-md shadow-blue-600/20 transition-all"
+            >
+              <span>Request a Quote</span>
+            </button>
+            <a
+              href="contact.html"
+              class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 text-xs sm:text-sm font-semibold transition-all"
+            >
+              <span>Contact Our Team</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       6. CORPORATE MIDNIGHT NAVY FOOTER (#0B132B)
+       ======================================================================== -->
+  <footer class="bg-brand-midnight text-slate-300 pt-14 pb-10 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-slate-800/90">
+        <!-- Col 1: Brand Logo & Jodhpur Corporate Address -->
+        <div class="lg:col-span-4 space-y-4">
+          <div class="inline-flex items-center bg-white px-3.5 py-2 rounded-xl">
+            <img
+              src="assets/images/xporus_logo.png"
+              alt="Xporus International Logo"
+              class="h-8 w-auto object-contain"
+              width="150"
+              height="32"
+            />
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed pr-4">
+            Xporus International is a premier B2B trade consultancy and global sourcing agency connecting international retailers with audited manufacturers across India.
+          </p>
+          <div class="space-y-1.5 text-xs text-slate-300 pt-1">
+            <p class="flex items-start gap-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
+              <span id="footer-address-text">Plot No. 18, Heavy Industrial Area, Jodhpur, Rajasthan 342003, India</span>
+            </p>
+            <p class="flex items-center gap-2">
+              <i data-lucide="phone" class="w-4 h-4 text-blue-400 shrink-0"></i>
+              <span id="footer-phone-text">+91 291 274 8890 / +91 98290 56789</span>
+            </p>
+            <p class="flex items-center gap-2">
+              <i data-lucide="mail" class="w-4 h-4 text-blue-400 shrink-0"></i>
+              <span id="footer-email-text">contact@xporusinternational.com</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div class="lg:col-span-2 space-y-3">
+          <h3 class="text-sm font-semibold text-white uppercase tracking-wider font-heading">Quick Links</h3>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><a href="index.html#home" class="hover:text-white transition-colors">Home</a></li>
+            <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="services.html" class="text-white font-medium transition-colors">Services</a></li>
+            <li><a href="index.html#products" class="hover:text-white transition-colors">Product Categories</a></li>
+            <li><a href="index.html#team" class="hover:text-white transition-colors">Leadership Team</a></li>
+            <li><a href="index.html#testimonials" class="hover:text-white transition-colors">Client Stories</a></li>
+            <li><a href="contact.html" class="hover:text-white transition-colors">Contact Us</a></li>
+            <li><a href="admin.html" class="text-blue-400 hover:text-blue-300 font-semibold transition-colors">Admin CMS Portal →</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Core Services -->
+        <div class="lg:col-span-3 space-y-3">
+          <h3 class="text-sm font-semibold text-white uppercase tracking-wider font-heading">Core Services</h3>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><a href="#service-1" class="hover:text-white transition-colors">Consultancy Service</a></li>
+            <li><a href="#service-2" class="hover:text-white transition-colors">Business Advisory</a></li>
+            <li><a href="#service-3" class="hover:text-white transition-colors">Export &amp; Import Services</a></li>
+            <li><a href="#service-4" class="hover:text-white transition-colors">Market Research</a></li>
+            <li><a href="#service-5" class="hover:text-white transition-colors">Quality Assurance</a></li>
+            <li><a href="#service-6" class="hover:text-white transition-colors">Logistics Management</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Newsletter Signup -->
+        <div class="lg:col-span-3 space-y-3">
+          <h3 class="text-sm font-semibold text-white uppercase tracking-wider font-heading">Newsletter</h3>
+          <p class="text-xs text-slate-400">
+            Receive quarterly India sourcing insights, tariff updates, and seasonal catalog releases.
+          </p>
+          <form id="newsletter-form" class="flex items-center gap-2 pt-1">
+            <input
+              id="newsletter-email"
+              type="email"
+              required
+              placeholder="Enter your email"
+              class="w-full px-3.5 py-2.5 rounded-lg bg-white text-slate-900 text-xs outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="submit"
+              class="px-4 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shrink-0 transition-colors"
+            >
+              Subscribe
+            </button>
+          </form>
+          <p id="newsletter-msg" class="hidden text-xs text-emerald-400 font-medium">
+            ✓ Subscribed! Added to Xporus mailing list.
+          </p>
+          <div class="pt-3 flex items-center gap-3">
+            <a
+              href="https://www.linkedin.com"
+              target="_blank"
+              rel="noopener"
+              aria-label="Xporus International LinkedIn"
+              class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-blue-600 text-white flex items-center justify-center transition-colors"
+            >
+              <i data-lucide="linkedin" class="w-4 h-4"></i>
+            </a>
+            <a
+              href="contact.html"
+              aria-label="Email Xporus International"
+              class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-blue-600 text-white flex items-center justify-center transition-colors"
+            >
+              <i data-lucide="mail" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub-Footer Copyright Bar -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <p>© 2026 Xporus International. All rights reserved.</p>
+        <div class="flex items-center gap-6">
+          <a href="contact.html" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="contact.html" class="hover:text-white transition-colors">Terms of Use</a>
+          <a href="admin.html" class="hover:text-white transition-colors">Admin Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       "GET A QUOTE / LET'S SPEAK" POPUP MODAL
+       ======================================================================== -->
+  <div
+    id="quote-modal"
+    class="modal-backdrop hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4"
+  >
+    <div class="modal-animate bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 sm:p-8 relative border border-slate-200">
+      <button
+        type="button"
+        class="close-modal-btn absolute top-5 right-5 w-8 h-8 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 flex items-center justify-center"
+        aria-label="Close Modal"
+      >
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div id="quote-modal-form-wrap">
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium uppercase tracking-wider bg-blue-50 text-blue-700 mb-2">
+          FAST-TRACK RFQ DESK
+        </span>
+        <h3 class="text-2xl font-semibold text-slate-900 font-heading mb-1">Let’s Speak...</h3>
+        <p class="text-xs text-slate-500 mb-5">
+          Share your sourcing or consulting requirements. Your inquiry goes directly to our Admin CRM.
+        </p>
+
+        <form id="quote-modal-form" class="space-y-3.5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-xs font-medium text-slate-700 mb-1">Full Name *</label>
+              <input
+                type="text"
+                name="name"
+                required
+                placeholder="John Carter"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-700 mb-1">Work Email *</label>
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="john@company.com"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 outline-none"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-xs font-medium text-slate-700 mb-1">Mobile / WhatsApp</label>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="+1 555 019 2834"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-700 mb-1">Company &amp; Country *</label>
+              <input
+                type="text"
+                name="company"
+                required
+                placeholder="Apex Retail (UK)"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 outline-none"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-slate-700 mb-1">Selected Service / Product Category</label>
+            <select
+              id="modal-interest-select"
+              name="interest"
+              class="inquiry-interest-select w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white focus:ring-2 focus:ring-blue-600 outline-none"
+            ></select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-slate-700 mb-1">Sourcing Specifications / Message *</label>
+            <textarea
+              name="message"
+              rows="3"
+              required
+              placeholder="Tell us about your target product specs, target FOB pricing, or consulting requirement..."
+              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 outline-none"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold shadow-md shadow-blue-600/20 transition-all"
+          >
+            Submit Quote Request
+          </button>
+        </form>
+      </div>
+
+      <!-- Success State -->
+      <div id="quote-modal-success" class="hidden text-center py-6 space-y-3">
+        <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+          <i data-lucide="check" class="w-7 h-7"></i>
+        </div>
+        <h4 class="text-xl font-semibold text-slate-900 font-heading">Quote Request Logged!</h4>
+        <p class="text-xs text-slate-600 max-w-sm mx-auto leading-relaxed">
+          Thank you for contacting <strong>Xporus International</strong>. Your inquiry is now visible in the Admin CRM and our sourcing specialists will respond within 24 hours.
+        </p>
+        <button
+          type="button"
+          class="close-modal-btn mt-2 px-6 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-semibold"
+        >
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared CMS Data Store & Frontend Controller -->
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
