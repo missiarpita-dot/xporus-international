@@ -171,70 +171,98 @@
         <!-- Filter Pills + Instant Product Search + Counter Bar -->
         <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-xs mb-10 space-y-4">
           <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-            <!-- Category Filter Pills for Individual Products -->
+            <!-- Category Filter Pills for Individual Products (All 12 Categories, 3 Products Each) -->
             <div class="flex flex-wrap items-center gap-2" id="product-filter-pills">
               <button
                 type="button"
                 data-prod-filter="all"
                 class="prod-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-blue-600 text-white shadow-xs border border-transparent transition-all"
               >
-                All Products (24)
+                All Products (36)
               </button>
               <button
                 type="button"
                 data-prod-filter="furniture"
                 class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
               >
-                Furniture
+                Furniture (3)
               </button>
               <button
                 type="button"
                 data-prod-filter="lighting"
                 class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
               >
-                Lamps &amp; Lighting
+                Lamps &amp; Lighting (3)
               </button>
               <button
                 type="button"
                 data-prod-filter="textiles"
                 class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
               >
-                Home Textiles
+                Home Textiles (3)
               </button>
               <button
                 type="button"
                 data-prod-filter="kitchen"
                 class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
               >
-                Kitchen &amp; Dining
+                Kitchen &amp; Dining (3)
               </button>
               <button
                 type="button"
                 data-prod-filter="decor"
                 class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
               >
-                Home Décor
+                Home Décor (3)
               </button>
               <button
                 type="button"
                 data-prod-filter="bath"
                 class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
               >
-                Bath Collection
+                Bath Collection (3)
               </button>
               <button
                 type="button"
                 data-prod-filter="fashion"
                 class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
               >
-                Bags &amp; Accessories
+                Bags &amp; Accessories (3)
               </button>
               <button
                 type="button"
                 data-prod-filter="outdoor"
                 class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
               >
-                Outdoor Living
+                Outdoor Living (3)
+              </button>
+              <button
+                type="button"
+                data-prod-filter="rugs"
+                class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
+              >
+                Cushions &amp; Rugs (3)
+              </button>
+              <button
+                type="button"
+                data-prod-filter="seasonal"
+                class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
+              >
+                Seasonal &amp; Christmas (3)
+              </button>
+              <button
+                type="button"
+                data-prod-filter="kids"
+                class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
+              >
+                Kids &amp; Nursery (3)
+              </button>
+              <button
+                type="button"
+                data-prod-filter="hardware"
+                class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
+              >
+                Home Improvement &amp; DIY (3)
               </button>
             </div>
 
@@ -255,7 +283,7 @@
           <div class="pt-3 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-500">
             <div class="flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-              <span id="all-products-count-text" class="font-medium text-slate-700">Showing all 24 export products</span>
+              <span id="all-products-count-text" class="font-medium text-slate-700">Showing all 36 export products across 12 categories (3 products per category)</span>
             </div>
             <div class="flex items-center gap-4 text-[11px] text-slate-500">
               <span class="inline-flex items-center gap-1">
@@ -270,10 +298,10 @@
           </div>
         </div>
 
-        <!-- Unified Grid of All Individual Products -->
+        <!-- Unified Showcase of All Individual Products Grouped by Category -->
         <div
           id="all-products-grid"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7"
+          class="space-y-14"
         >
           <!-- Dynamically populated by main.js from XporusStore.products -->
         </div>

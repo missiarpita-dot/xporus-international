@@ -441,7 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (countEl) {
       countEl.textContent =
         filtered.length === allProducts.length
-          ? `Showing all ${allProducts.length} export products`
+          ? `Showing all ${allProducts.length} export products across 12 categories (3 products per category)`
           : `Showing ${filtered.length} of ${allProducts.length} export products`;
     }
 
@@ -477,9 +477,22 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    grid.innerHTML = filtered
-      .map(
-        (prd) => `
+    const categoryOrder = [
+      { key: 'furniture', num: '01', label: 'Furniture', desc: 'Solid wood dining, living, and bedroom furniture crafted in our Jodhpur manufacturing clusters.' },
+      { key: 'lighting', num: '02', label: 'Lamps & Lighting', desc: 'Hand-spun brass pendants, marble table lamps, and woven coastal chandeliers.' },
+      { key: 'textiles', num: '03', label: 'Home Textiles', desc: 'Organic percale bedding, waffle throws, and hand-block printed table linens.' },
+      { key: 'kitchen', num: '04', label: 'Kitchen & Dining', desc: 'Marble & acacia charcuterie boards, PVD forged flatware, and reactive glaze stoneware.' },
+      { key: 'decor', num: '05', label: 'Home Décor & Accessories', desc: 'Architectural brass mirrors, recycled glass hurricanes, and artisanal ceramic vessels.' },
+      { key: 'bath', num: '06', label: 'Bath Collection', desc: 'Solid marble vanity sets, 650 GSM zero-twist bath sheets, and woven seagrass hampers.' },
+      { key: 'fashion', num: '07', label: 'Bags & Accessories', desc: 'Full-grain vegetable-tanned leather travel bags, heavyweight canvas totes, and raffia resort bags.' },
+      { key: 'outdoor', num: '08', label: 'Outdoor Living', desc: 'All-weather plantation teak lounge sets, galvanized metal planters, and outdoor lanterns.' },
+      { key: 'rugs', num: '09', label: 'Cushions & Rugs', desc: 'Hand-tufted New Zealand wool area rugs, crewel embroidered cushions, and braided poufs.' },
+      { key: 'seasonal', num: '10', label: 'Seasonal & Christmas', desc: 'Zardozi beaded ornaments, carved mango wood candle holders, and mercury glass holiday candles.' },
+      { key: 'kids', num: '11', label: 'Kids & Nursery', desc: 'Rattan & solid wood nursery cribs, organic muslin playmats, and braided cotton toy storage.' },
+      { key: 'hardware', num: '12', label: 'Home Improvement & DIY', desc: 'Knurled solid brass cabinet hardware, Jaipur blue pottery knobs, and cast-iron shelf kits.' }
+    ];
+
+    const renderProductCard = (prd) => `
       <article
         id="${escapeHtml(prd.id)}"
         class="bg-white rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-lg hover:border-blue-300/90 transition-all duration-200 overflow-hidden flex flex-col justify-between group"
@@ -565,8 +578,51 @@ document.addEventListener('DOMContentLoaded', () => {
           </button>
         </div>
       </article>
-    `
-      )
+    `;
+
+    grid.innerHTML = categoryOrder
+      .map((catMeta) => {
+        const items = filtered.filter((p) => p.categoryKey === catMeta.key);
+        if (items.length === 0) return '';
+        return `
+          <div id="cat-${escapeHtml(catMeta.key)}" class="scroll-mt-28 space-y-6">
+            <!-- Category Section Header Bar -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200">
+              <div class="flex items-start sm:items-center gap-3.5">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-blue-600 text-white text-sm font-semibold tabular-nums shrink-0 shadow-xs">
+                  ${escapeHtml(catMeta.num)}
+                </span>
+                <div>
+                  <div class="flex items-center gap-2.5">
+                    <h2 class="text-xl sm:text-2xl font-semibold text-slate-900 font-heading tracking-tight">
+                      ${escapeHtml(catMeta.label)}
+                    </h2>
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-200/70">
+                      ${items.length} ${items.length === 1 ? 'Product' : 'Products'}
+                    </span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-500 mt-0.5">
+                    ${escapeHtml(catMeta.desc)}
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                data-prd-interest="Category: ${escapeHtml(catMeta.label)}"
+                class="inquire-prd-btn self-start sm:self-auto inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white hover:bg-blue-50 text-blue-600 border border-blue-200 text-xs font-semibold transition-colors shrink-0"
+              >
+                <span>Request Full ${escapeHtml(catMeta.label)} Catalog</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+
+            <!-- 3 Individual Products Grid for This Category -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+              ${items.map(renderProductCard).join('')}
+            </div>
+          </div>
+        `;
+      })
       .join('');
 
     grid.querySelectorAll('.open-prd-spec-btn').forEach((btn) => {
