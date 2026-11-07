@@ -3,18 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Primary SEO Meta Tags -->
-  <title>Product Categories | Xporus International — Global Sourcing Catalog from India</title>
-  <meta name="title" content="Product Categories | Xporus International — Global Sourcing Catalog from India" />
-  <meta name="description" content="Explore all 12 export product categories sourced by Xporus International across 50+ Indian factories: Furniture, Lamps & Lighting, Home Textiles, Kitchen & Dining, Home Décor, Bath, Bags, Outdoor Living, Rugs, Seasonal, Kids & DIY." />
+  <title>All Products Catalog | Xporus International — Handcrafted Furniture, Lighting, Textiles &amp; Décor</title>
+  <meta
+    name="description"
+    content="Browse all export-ready products from Xporus International: solid wood furniture, brass lamps & lighting, organic home textiles, kitchenware, home décor, bath accessories, leather bags, and outdoor living."
+  />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://xporusinternational.com/products.html" />
 
-  <!-- Google Fonts: Montserrat -->
+  <!-- Open Graph / Social Meta -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="All Products Catalog | Xporus International" />
+  <meta
+    property="og:description"
+    content="Explore our complete catalog of individual export products manufactured across 50+ factories in India."
+  />
+  <meta property="og:image" content="assets/images/xporus_logo.png" />
+
+  <!-- Google Fonts: Montserrat (Indel Money Clean Corporate Hierarchy: 400 Regular / 500 Medium / 600 SemiBold) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -23,29 +35,14 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Montserrat', 'sans-serif'],
-            heading: ['Montserrat', 'sans-serif']
-          },
-          fontWeight: {
-            thin: '300',
-            extralight: '300',
-            light: '300',
-            normal: '400',
-            medium: '500',
-            semibold: '600',
-            bold: '600',
-            extrabold: '600',
-            black: '600'
+            heading: ['"Montserrat"', 'sans-serif'],
+            sans: ['"Montserrat"', 'sans-serif']
           },
           colors: {
             brand: {
-              50: '#EFF6FF',
-              100: '#DBEAFE',
-              500: '#3B82F6',
-              600: '#2563EB',
-              700: '#1D4ED8',
-              800: '#1E40AF',
-              900: '#1E3A8A',
+              sapphire: '#2563EB',
+              cobalt: '#1D4ED8',
+              ice: '#EFF6FF',
               midnight: '#0B132B'
             }
           }
@@ -54,11 +51,11 @@
     };
   </script>
 
-  <!-- Custom Styles -->
-  <link rel="stylesheet" href="assets/css/styles.css" />
-
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 
 <body class="bg-white text-slate-900 antialiased selection:bg-blue-600 selection:text-white overflow-x-hidden">
@@ -154,139 +151,144 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
         <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/70 text-xs font-medium uppercase tracking-wider text-blue-700">
           <span class="w-2 h-2 rounded-full bg-blue-600"></span>
-          EXPORT CATALOG
+          COMPLETE EXPORT PRODUCT CATALOG
         </span>
         <h1 class="text-3xl sm:text-5xl font-normal text-slate-900 font-heading tracking-tight">
-          Our Product <span class="heading-accent">Categories</span>
+          Explore All Our <span class="heading-accent">Products</span>
         </h1>
         <p class="text-slate-600 text-sm sm:text-base max-w-3xl mx-auto">
-          Curated export categories crafted across 50+ factories in India. Hover or tap on any card to flip and explore specialized subcategories, or browse our complete catalog breakdown below.
+          Discover our complete range of export-ready individual products crafted across 50+ partner factories in India — complete with material specifications, dimensions, origin clusters, and direct RFQ options.
         </p>
       </div>
     </section>
 
     <!-- ======================================================================
-         3. INTERACTIVE 3D FLIP-BOX CATALOG GRID (All 12 Product Categories)
+         3. ALL INDIVIDUAL PRODUCTS SHOWCASE (Single Page Unified Catalog)
          ====================================================================== -->
-    <section id="interactive-catalog" class="py-14 lg:py-20 bg-white border-b border-slate-200/70">
+    <section id="all-products-catalog" class="py-14 lg:py-20 bg-slate-50/60">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Category Filter Pills + Live Subcategory Search -->
-        <div class="flex flex-col lg:flex-row items-center justify-between gap-4 mb-10 bg-slate-50/90 p-3 rounded-2xl border border-slate-200/80">
-          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2">
-            <button
-              type="button"
-              data-filter="all"
-              class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm border border-transparent transition-all"
-            >
-              All Categories (12)
-            </button>
-            <button
-              type="button"
-              data-filter="featured"
-              class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:border-blue-300 transition-all"
-            >
-              Core 8 Categories
-            </button>
-            <button
-              type="button"
-              data-filter="furniture"
-              class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:border-blue-300 transition-all"
-            >
-              Furniture &amp; Outdoor
-            </button>
-            <button
-              type="button"
-              data-filter="textiles"
-              class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:border-blue-300 transition-all"
-            >
-              Home Textiles &amp; Bath
-            </button>
-            <button
-              type="button"
-              data-filter="lighting"
-              class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:border-blue-300 transition-all"
-            >
-              Lamps &amp; Lighting
-            </button>
-            <button
-              type="button"
-              data-filter="kitchen"
-              class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:border-blue-300 transition-all"
-            >
-              Kitchen &amp; Dining
-            </button>
-            <button
-              type="button"
-              data-filter="decor"
-              class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:border-blue-300 transition-all"
-            >
-              Décor &amp; Seasonal
-            </button>
-            <button
-              type="button"
-              data-filter="fashion"
-              class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:border-blue-300 transition-all"
-            >
-              Bags &amp; Accessories
-            </button>
+
+        <!-- Filter Pills + Instant Product Search + Counter Bar -->
+        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-xs mb-10 space-y-4">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <!-- Category Filter Pills for Individual Products -->
+            <div class="flex flex-wrap items-center gap-2" id="product-filter-pills">
+              <button
+                type="button"
+                data-prod-filter="all"
+                class="prod-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-blue-600 text-white shadow-xs border border-transparent transition-all"
+              >
+                All Products (24)
+              </button>
+              <button
+                type="button"
+                data-prod-filter="furniture"
+                class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
+              >
+                Furniture
+              </button>
+              <button
+                type="button"
+                data-prod-filter="lighting"
+                class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
+              >
+                Lamps &amp; Lighting
+              </button>
+              <button
+                type="button"
+                data-prod-filter="textiles"
+                class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
+              >
+                Home Textiles
+              </button>
+              <button
+                type="button"
+                data-prod-filter="kitchen"
+                class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
+              >
+                Kitchen &amp; Dining
+              </button>
+              <button
+                type="button"
+                data-prod-filter="decor"
+                class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
+              >
+                Home Décor
+              </button>
+              <button
+                type="button"
+                data-prod-filter="bath"
+                class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
+              >
+                Bath Collection
+              </button>
+              <button
+                type="button"
+                data-prod-filter="fashion"
+                class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
+              >
+                Bags &amp; Accessories
+              </button>
+              <button
+                type="button"
+                data-prod-filter="outdoor"
+                class="prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all"
+              >
+                Outdoor Living
+              </button>
+            </div>
+
+            <!-- Instant Search Input -->
+            <div class="relative w-full lg:w-72 shrink-0">
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+              <input
+                id="all-products-search-input"
+                type="search"
+                placeholder="Search product, SKU, or material..."
+                aria-label="Search All Products"
+                class="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 placeholder:text-slate-400 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all"
+              />
+            </div>
           </div>
 
-          <!-- Instant Subcategory Search Input -->
-          <div class="relative w-full lg:w-64 shrink-0">
-            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-            <input
-              id="category-search-input"
-              type="search"
-              placeholder="Search products (e.g. rugs, brass)..."
-              aria-label="Search Product Categories"
-              class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none"
-            />
+          <!-- Active Count & Custom OEM Notice -->
+          <div class="pt-3 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span id="all-products-count-text" class="font-medium text-slate-700">Showing all 24 export products</span>
+            </div>
+            <div class="flex items-center gap-4 text-[11px] text-slate-500">
+              <span class="inline-flex items-center gap-1">
+                <i data-lucide="layers" class="w-3.5 h-3.5 text-blue-600"></i>
+                Custom Sizes &amp; Finishes Available
+              </span>
+              <span class="inline-flex items-center gap-1">
+                <i data-lucide="package-check" class="w-3.5 h-3.5 text-blue-600"></i>
+                Mixed Container Consolidation
+              </span>
+            </div>
           </div>
         </div>
 
-        <!-- 4x3 Medoc Sourcing Style 3D Flip-Box Grid (Defaults to All 12 Categories on Products Page) -->
+        <!-- Unified Grid of All Individual Products -->
         <div
-          id="categories-grid"
-          data-default-filter="all"
-          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          id="all-products-grid"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7"
         >
-          <!-- Dynamically populated by main.js from XporusStore -->
+          <!-- Dynamically populated by main.js from XporusStore.products -->
         </div>
+
       </div>
     </section>
 
     <!-- ======================================================================
-         4. COMPLETE 12-CATEGORY DETAILED DIRECTORY & SUBCATEGORY BREAKDOWN
-         ====================================================================== -->
-    <section id="complete-directory" class="py-16 lg:py-24 bg-slate-50/70">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
-          <span class="inline-flex items-center px-3.5 py-1 rounded-full text-xs font-medium uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200/60">
-            COMPLETE PRODUCT SPECIFICATION INDEX
-          </span>
-          <h2 class="text-3xl sm:text-4xl font-normal text-slate-900 font-heading tracking-tight">
-            All 12 Product <span class="heading-accent">Lines &amp; Subcategories</span>
-          </h2>
-          <p class="text-slate-600 text-sm sm:text-base">
-            Every product line is supported by our dedicated 2-member merchandising teams, custom design &amp; development, and 3-stage quality assurance inspections.
-          </p>
-        </div>
-
-        <!-- Dynamically rendered full directory of all 12 categories from XporusStore -->
-        <div id="product-directory-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Populated automatically below -->
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================================
-         5. OUR END-TO-END SOURCING & PRODUCTION WORKFLOW (#091128)
+         4. OUR END-TO-END SOURCING & PRODUCTION WORKFLOW (#091128)
          ====================================================================== -->
     <section class="py-16 lg:py-20 bg-[#091128] text-white">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-10">
           <h2 class="text-2xl sm:text-3xl font-normal text-white font-heading" style="color: #FFFFFF !important;">
-            From Concept Design to Final Container Delivery
+            Our End-to-End Execution Workflow
           </h2>
         </div>
 
@@ -295,7 +297,7 @@
           <div class="flex-1 bg-[#0F1B38] border border-[#2B3F6C] rounded-xl p-6 text-left">
             <span class="text-2xl font-medium text-[#60A5FA] block mb-2 tabular-nums">01</span>
             <h3 class="text-sm sm:text-base font-medium text-white leading-snug" style="color: #FFFFFF !important;">
-              Custom Design &amp;<br />Sampling
+              Concept &amp;<br />Design
             </h3>
           </div>
 
@@ -307,7 +309,7 @@
           <div class="flex-1 bg-[#0F1B38] border border-[#2B3F6C] rounded-xl p-6 text-left">
             <span class="text-2xl font-medium text-[#60A5FA] block mb-2 tabular-nums">02</span>
             <h3 class="text-sm sm:text-base font-medium text-white leading-snug" style="color: #FFFFFF !important;">
-              50+ Factory<br />Allocation
+              Merchandising &amp;<br />Production
             </h3>
           </div>
 
@@ -319,7 +321,7 @@
           <div class="flex-1 bg-[#0F1B38] border border-[#2B3F6C] rounded-xl p-6 text-left">
             <span class="text-2xl font-medium text-[#60A5FA] block mb-2 tabular-nums">03</span>
             <h3 class="text-sm sm:text-base font-medium text-white leading-snug" style="color: #FFFFFF !important;">
-              3-Stage QA<br />Inspections
+              3-Stage QA<br />Inspection
             </h3>
           </div>
 
@@ -331,7 +333,7 @@
           <div class="flex-1 bg-[#0F1B38] border border-[#2B3F6C] rounded-xl p-6 text-left">
             <span class="text-2xl font-medium text-[#60A5FA] block mb-2 tabular-nums">04</span>
             <h3 class="text-sm sm:text-base font-medium text-white leading-snug" style="color: #FFFFFF !important;">
-              Multi-Cluster<br />Door Delivery
+              Consolidation &amp;<br />Door Delivery
             </h3>
           </div>
         </div>
@@ -339,23 +341,23 @@
     </section>
 
     <!-- ======================================================================
-         6. BOTTOM CALL-TO-ACTION BANNER (White Outer Section + Ice-Blue Card)
+         5. BOTTOM CALL-TO-ACTION BANNER (White Outer Section + Ice-Blue Card)
          ====================================================================== -->
     <section class="py-14 lg:py-16 bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-[#E8F1FC] border border-[#C8DCF4] rounded-2xl p-8 sm:p-10 text-center space-y-4">
           <h2 class="text-2xl sm:text-3xl font-semibold text-slate-900 font-heading">
-            Looking for a Custom Catalog or Private Label Collection?
+            Need Custom OEM or Private Label Products?
           </h2>
           <p class="text-slate-700 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
-            Share your target product specifications, materials, or seasonal moodboards with our merchandising desk for tailored lookbooks and FOB quotes.
+            Beyond our standard catalog, we develop custom-engineered products from your CAD drawings, tech packs, or seasonal moodboards across 50+ factories in India.
           </p>
           <div class="flex flex-wrap items-center justify-center gap-3.5 pt-2">
             <button
               type="button"
               class="open-quote-modal-btn inline-flex items-center justify-center px-6 py-2.5 rounded-lg bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs sm:text-sm font-medium shadow-sm transition-all"
             >
-              <span>Request Product Catalog</span>
+              <span>Request a Quote</span>
             </button>
             <a
               href="contact.html"
@@ -370,7 +372,7 @@
   </main>
 
   <!-- ========================================================================
-       7. CORPORATE MIDNIGHT NAVY FOOTER (#0B132B — Exact Match to About Us)
+       6. CORPORATE MIDNIGHT NAVY FOOTER (#0B132B — Exact Match to About Us)
        ======================================================================== -->
   <footer class="bg-brand-midnight text-slate-300 pt-16 pb-10 border-t border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -491,7 +493,86 @@
   </footer>
 
   <!-- ========================================================================
-       "GET A QUOTE / LET'S SPEAK" POPUP MODAL
+       MODAL 1: INDIVIDUAL PRODUCT QUICK-VIEW SPECIFICATION MODAL
+       ======================================================================== -->
+  <div
+    id="product-detail-modal"
+    class="modal-backdrop hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4"
+  >
+    <div class="modal-animate bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden relative border border-slate-200">
+      <button
+        type="button"
+        class="close-modal-btn absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-white/90 text-slate-700 hover:bg-white hover:text-slate-900 shadow-md flex items-center justify-center transition-all"
+        aria-label="Close Product Modal"
+      >
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <!-- Product Image Column -->
+        <div class="md:col-span-5 bg-slate-100 relative min-h-[240px]">
+          <img
+            id="prd-modal-image"
+            src=""
+            alt=""
+            class="w-full h-full object-cover"
+          />
+          <span
+            id="prd-modal-sku"
+            class="absolute top-3.5 left-3.5 px-2.5 py-1 rounded-md bg-slate-900/85 text-white text-[11px] font-semibold tracking-wider uppercase"
+          ></span>
+        </div>
+
+        <!-- Product Details Column -->
+        <div class="md:col-span-7 p-6 sm:p-7 flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span
+                id="prd-modal-category"
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-200/60"
+              ></span>
+              <span
+                id="prd-modal-origin"
+                class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-600"
+              ></span>
+            </div>
+
+            <h3 id="prd-modal-title" class="text-xl font-semibold text-slate-900 font-heading mb-2"></h3>
+            <p id="prd-modal-desc" class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4"></p>
+
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200/80 space-y-2.5 text-xs">
+              <div class="flex items-start justify-between gap-3 border-b border-slate-200/60 pb-2">
+                <span class="font-semibold text-slate-500 shrink-0">Material Spec:</span>
+                <span id="prd-modal-material" class="text-slate-800 font-medium text-right"></span>
+              </div>
+              <div class="flex items-start justify-between gap-3 border-b border-slate-200/60 pb-2">
+                <span class="font-semibold text-slate-500 shrink-0">Dimensions / Options:</span>
+                <span id="prd-modal-dimensions" class="text-slate-800 font-medium text-right"></span>
+              </div>
+              <div class="flex items-start justify-between gap-3">
+                <span class="font-semibold text-slate-500 shrink-0">Export MOQ:</span>
+                <span id="prd-modal-moq" class="text-blue-700 font-semibold text-right"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2 flex items-center gap-3">
+            <button
+              type="button"
+              id="prd-modal-inquire-btn"
+              class="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-sm transition-all flex items-center justify-center gap-2"
+            >
+              <span>Request FOB Quote for This Product</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 2: "GET A QUOTE / LET'S SPEAK" POPUP MODAL
        ======================================================================== -->
   <div
     id="quote-modal"
@@ -512,7 +593,7 @@
         </span>
         <h3 class="text-2xl font-semibold text-slate-900 font-heading mb-1">Let’s Speak...</h3>
         <p class="text-xs text-slate-500 mb-5">
-          Share your sourcing or consulting requirements. Your inquiry goes directly to our Admin CRM.
+          Share your sourcing or product requirements. Your inquiry goes directly to our Admin CRM.
         </p>
 
         <form id="quote-modal-form" class="space-y-3.5">
@@ -562,7 +643,7 @@
           </div>
 
           <div>
-            <label class="block text-xs font-medium text-slate-700 mb-1">Selected Service / Product Category</label>
+            <label class="block text-xs font-medium text-slate-700 mb-1">Selected Product / Category</label>
             <select
               id="modal-interest-select"
               name="interest"
@@ -571,12 +652,12 @@
           </div>
 
           <div>
-            <label class="block text-xs font-medium text-slate-700 mb-1">Sourcing Specifications / Message *</label>
+            <label class="block text-xs font-medium text-slate-700 mb-1">Sourcing Specifications / Quantity *</label>
             <textarea
               name="message"
               rows="3"
               required
-              placeholder="Tell us about your target product specs, target FOB pricing, or consulting requirement..."
+              placeholder="Tell us your target order quantity, custom dimensions/finishes, or destination port..."
               class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-blue-600 outline-none"
             ></textarea>
           </div>

@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('categories-grid')?.getAttribute('data-default-filter') || 'featured';
   let currentCategoryFilter = defaultCatFilter;
   let currentCategorySearch = '';
+  let currentProductFilter = 'all';
+  let currentProductSearch = '';
   let currentTestimonialSlide = 0;
   let metricsAnimated = false;
 
@@ -23,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAllSections();
   initNavbarAndScrollSpy();
   initCategorySearchAndFilters();
+  initAllProductsSearchAndFilters();
   initModalsAndForms();
   initMetricsCounterObserver();
 
@@ -44,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderMetricsBar();
     renderServicesGrid();
     renderProductCategories();
-    renderProductDirectoryList();
+    renderAllProductsCatalog();
     renderLeadershipTeam();
     renderTestimonialsCarousel();
     populateInquiryCategoryDropdowns();
@@ -407,105 +410,237 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ==========================================================================
-     4B. Render Complete 12-Category Detailed Directory List (Products Page)
+     4B. Render Unified All Individual Products Catalog (products.html)
      ========================================================================== */
-  function renderProductDirectoryList() {
-    const dirContainer = document.getElementById('product-directory-list');
-    if (!dirContainer) return;
+  function renderAllProductsCatalog() {
+    const grid = document.getElementById('all-products-grid');
+    if (!grid) return;
 
-    const allCats = cmsData.categories || [];
-    const groupLabels = {
-      furniture: 'Furniture & Outdoor',
-      textiles: 'Home Textiles & Bath',
-      lighting: 'Lamps & Lighting',
-      kitchen: 'Kitchen & Dining',
-      decor: 'Décor & Seasonal',
-      fashion: 'Bags & Accessories'
-    };
+    const allProducts = cmsData.products || [];
+    let filtered = allProducts;
 
-    dirContainer.innerHTML = allCats
-      .map((cat, idx) => {
-        const num = String(idx + 1).padStart(2, '0');
-        const subs = Array.isArray(cat.subcategories) ? cat.subcategories : [];
-        const groupLabel = groupLabels[cat.group] || 'Export Category';
-        return `
-        <div
-          id="category-${idx + 1}"
-          class="bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-blue-300 transition-all overflow-hidden flex flex-col justify-between group"
-        >
-          <div>
-            <!-- Category Image Header -->
-            <div class="relative h-48 overflow-hidden bg-slate-100">
-              <img
-                src="${escapeHtml(cat.image)}"
-                alt="${escapeHtml(cat.title)} — Xporus International Product Line"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-                width="420"
-                height="220"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/75 via-slate-900/20 to-transparent"></div>
-              <div class="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between">
-                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/95 text-blue-700 shadow-xs">
-                  ${escapeHtml(groupLabel)}
-                </span>
-                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-600 text-white text-xs font-semibold tabular-nums shadow-sm">
-                  ${num}
-                </span>
-              </div>
-              <div class="absolute bottom-3.5 left-4 right-4">
-                <h3 class="text-lg font-semibold text-white font-heading tracking-wide" style="color: #FFFFFF !important;">
-                  ${escapeHtml(cat.title)}
-                </h3>
-              </div>
-            </div>
+    if (currentProductFilter !== 'all') {
+      filtered = filtered.filter((p) => p.categoryKey === currentProductFilter);
+    }
 
-            <!-- Subcategory Checklist -->
-            <div class="p-6">
-              <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
-                <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-                  Available Subcategories (${subs.length})
-                </span>
-                <span class="text-[11px] font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
-                  Custom OEM / ODM
-                </span>
-              </div>
-              <ul class="space-y-2 text-xs sm:text-sm text-slate-600">
-                ${subs
-                  .map(
-                    (sub) => `
-                  <li class="flex items-start gap-2">
-                    <i data-lucide="check-circle-2" class="w-4 h-4 text-blue-600 shrink-0 mt-0.5"></i>
-                    <span>${escapeHtml(sub)}</span>
-                  </li>
-                `
-                  )
-                  .join('')}
-              </ul>
-            </div>
-          </div>
+    if (currentProductSearch.trim() !== '') {
+      const q = currentProductSearch.trim().toLowerCase();
+      filtered = filtered.filter((p) => {
+        return (
+          (p.title || '').toLowerCase().includes(q) ||
+          (p.sku || '').toLowerCase().includes(q) ||
+          (p.category || '').toLowerCase().includes(q) ||
+          (p.material || '').toLowerCase().includes(q) ||
+          (p.origin || '').toLowerCase().includes(q) ||
+          (p.shortDesc || '').toLowerCase().includes(q)
+        );
+      });
+    }
 
-          <!-- Action Footer -->
-          <div class="px-6 pb-6 pt-2">
-            <button
-              type="button"
-              data-cat-title="Category: ${escapeHtml(cat.title)}"
-              class="dir-cat-inquire-btn w-full py-2.5 px-4 rounded-xl bg-blue-50 hover:bg-blue-600 text-blue-700 hover:text-white text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
-            >
-              <span>Request ${escapeHtml(cat.title)} Catalog &amp; Quote</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </button>
-          </div>
+    const countEl = document.getElementById('all-products-count-text');
+    if (countEl) {
+      countEl.textContent =
+        filtered.length === allProducts.length
+          ? `Showing all ${allProducts.length} export products`
+          : `Showing ${filtered.length} of ${allProducts.length} export products`;
+    }
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `
+        <div class="col-span-full py-14 px-6 text-center bg-white rounded-2xl border border-slate-200/90 shadow-xs">
+          <p class="text-base font-semibold text-slate-800 mb-1">No matching products found for "${escapeHtml(
+            currentProductSearch
+          )}"</p>
+          <p class="text-xs text-slate-500 mb-4 max-w-md mx-auto">We manufacture 1,000+ custom SKUs across 50+ partner factories. Reset filters or send us your custom product brief.</p>
+          <button
+            type="button"
+            id="reset-all-products-btn"
+            class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition-colors"
+          >
+            Show All ${allProducts.length} Products
+          </button>
         </div>
       `;
-      })
+      document.getElementById('reset-all-products-btn')?.addEventListener('click', () => {
+        currentProductFilter = 'all';
+        currentProductSearch = '';
+        const searchInput = document.getElementById('all-products-search-input');
+        if (searchInput) searchInput.value = '';
+        document.querySelectorAll('.prod-filter-btn').forEach((b) => {
+          const isAll = b.getAttribute('data-prod-filter') === 'all';
+          b.className = isAll
+            ? 'prod-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-blue-600 text-white shadow-xs border border-transparent transition-all'
+            : 'prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all';
+        });
+        renderAllProductsCatalog();
+      });
+      return;
+    }
+
+    grid.innerHTML = filtered
+      .map(
+        (prd) => `
+      <article
+        id="${escapeHtml(prd.id)}"
+        class="bg-white rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-lg hover:border-blue-300/90 transition-all duration-200 overflow-hidden flex flex-col justify-between group"
+      >
+        <div>
+          <!-- Product Image + SKU & Category Badges -->
+          <div
+            class="relative h-60 overflow-hidden bg-slate-100 cursor-pointer open-prd-spec-btn"
+            data-product-id="${escapeHtml(prd.id)}"
+          >
+            <img
+              src="${escapeHtml(prd.image)}"
+              alt="${escapeHtml(prd.title)} — ${escapeHtml(prd.sku)}"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+              width="420"
+              height="260"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/55 via-transparent to-transparent opacity-80"></div>
+            <div class="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between gap-2">
+              <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/95 text-blue-700 shadow-xs">
+                ${escapeHtml(prd.category)}
+              </span>
+              <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold bg-slate-900/85 text-white tracking-wider uppercase">
+                ${escapeHtml(prd.sku)}
+              </span>
+            </div>
+            <div class="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between text-[11px] text-white font-medium">
+              <span class="inline-flex items-center gap-1 bg-slate-900/70 backdrop-blur-xs px-2.5 py-1 rounded-full">
+                <i data-lucide="map-pin" class="w-3 h-3 text-blue-300"></i>
+                <span>${escapeHtml(prd.origin)}</span>
+              </span>
+              <span class="inline-flex items-center gap-1 bg-blue-600/90 px-2.5 py-1 rounded-full text-[10px] font-semibold">
+                Export Ready
+              </span>
+            </div>
+          </div>
+
+          <!-- Product Info & Technical Specs -->
+          <div class="p-6">
+            <h3 class="text-lg font-semibold text-slate-900 font-heading mb-2 group-hover:text-blue-600 transition-colors leading-snug">
+              ${escapeHtml(prd.title)}
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+              ${escapeHtml(prd.shortDesc)}
+            </p>
+
+            <!-- Structured Specification Table -->
+            <div class="bg-slate-50/90 rounded-xl p-3.5 border border-slate-200/70 space-y-2 text-xs">
+              <div class="flex items-start justify-between gap-2 border-b border-slate-200/60 pb-1.5">
+                <span class="text-slate-500 font-medium shrink-0">Material:</span>
+                <span class="text-slate-800 font-medium text-right">${escapeHtml(prd.material)}</span>
+              </div>
+              <div class="flex items-start justify-between gap-2 border-b border-slate-200/60 pb-1.5">
+                <span class="text-slate-500 font-medium shrink-0">Specs / Size:</span>
+                <span class="text-slate-800 font-medium text-right">${escapeHtml(prd.dimensions)}</span>
+              </div>
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-slate-500 font-medium shrink-0">MOQ:</span>
+                <span class="text-blue-700 font-semibold text-right">${escapeHtml(prd.moq)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card Action Footer -->
+        <div class="px-6 pb-6 pt-1 flex items-center gap-2.5">
+          <button
+            type="button"
+            data-product-id="${escapeHtml(prd.id)}"
+            class="open-prd-spec-btn flex-1 py-2.5 px-3 rounded-xl border border-slate-200 hover:border-blue-300 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold transition-all flex items-center justify-center gap-1.5"
+          >
+            <i data-lucide="eye" class="w-3.5 h-3.5 text-blue-600"></i>
+            <span>Quick Specs</span>
+          </button>
+          <button
+            type="button"
+            data-prd-interest="Product: ${escapeHtml(prd.title)} (${escapeHtml(prd.sku)})"
+            class="inquire-prd-btn flex-1 py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-xs transition-all flex items-center justify-center gap-1.5"
+          >
+            <span>Request Quote</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </article>
+    `
+      )
       .join('');
 
-    dirContainer.querySelectorAll('.dir-cat-inquire-btn').forEach((btn) => {
+    grid.querySelectorAll('.open-prd-spec-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
-        openQuoteModal(btn.getAttribute('data-cat-title'));
+        const prdId = btn.getAttribute('data-product-id');
+        const prd = (cmsData.products || []).find((p) => p.id === prdId);
+        if (prd) openProductDetailModal(prd);
       });
     });
+
+    grid.querySelectorAll('.inquire-prd-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        openQuoteModal(btn.getAttribute('data-prd-interest'));
+      });
+    });
+
+    if (window.lucide) window.lucide.createIcons();
+  }
+
+  function initAllProductsSearchAndFilters() {
+    document.querySelectorAll('.prod-filter-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        currentProductFilter = btn.getAttribute('data-prod-filter') || 'all';
+        document.querySelectorAll('.prod-filter-btn').forEach((b) => {
+          b.className =
+            'prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all';
+        });
+        btn.className =
+          'prod-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-blue-600 text-white shadow-xs border border-transparent transition-all';
+        renderAllProductsCatalog();
+      });
+    });
+
+    const searchInput = document.getElementById('all-products-search-input');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        currentProductSearch = e.target.value;
+        renderAllProductsCatalog();
+      });
+    }
+  }
+
+  function openProductDetailModal(prd) {
+    const modal = document.getElementById('product-detail-modal');
+    if (!modal) return;
+
+    const imgEl = document.getElementById('prd-modal-image');
+    if (imgEl) {
+      imgEl.src = prd.image;
+      imgEl.alt = prd.title;
+    }
+    const setTxt = (id, val) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = val || '';
+    };
+    setTxt('prd-modal-sku', prd.sku);
+    setTxt('prd-modal-category', prd.category);
+    setTxt('prd-modal-origin', prd.origin);
+    setTxt('prd-modal-title', prd.title);
+    setTxt('prd-modal-desc', prd.shortDesc);
+    setTxt('prd-modal-material', prd.material);
+    setTxt('prd-modal-dimensions', prd.dimensions);
+    setTxt('prd-modal-moq', prd.moq);
+
+    const inquireBtn = document.getElementById('prd-modal-inquire-btn');
+    if (inquireBtn) {
+      inquireBtn.onclick = () => {
+        modal.classList.add('hidden');
+        openQuoteModal(`Product: ${prd.title} (${prd.sku})`);
+      };
+    }
+
+    modal.classList.remove('hidden');
+    if (window.lucide) window.lucide.createIcons();
   }
 
   /* ==========================================================================
