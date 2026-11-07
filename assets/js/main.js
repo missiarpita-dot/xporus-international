@@ -12,7 +12,9 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   let cmsData = window.XporusStore.getData();
-  let currentCategoryFilter = 'featured';
+  const defaultCatFilter =
+    document.getElementById('categories-grid')?.getAttribute('data-default-filter') || 'featured';
+  let currentCategoryFilter = defaultCatFilter;
   let currentCategorySearch = '';
   let currentTestimonialSlide = 0;
   let metricsAnimated = false;
@@ -42,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderMetricsBar();
     renderServicesGrid();
     renderProductCategories();
+    renderProductDirectoryList();
     renderLeadershipTeam();
     renderTestimonialsCarousel();
     populateInquiryCategoryDropdowns();
@@ -401,6 +404,108 @@ document.addEventListener('DOMContentLoaded', () => {
         renderProductCategories();
       });
     }
+  }
+
+  /* ==========================================================================
+     4B. Render Complete 12-Category Detailed Directory List (Products Page)
+     ========================================================================== */
+  function renderProductDirectoryList() {
+    const dirContainer = document.getElementById('product-directory-list');
+    if (!dirContainer) return;
+
+    const allCats = cmsData.categories || [];
+    const groupLabels = {
+      furniture: 'Furniture & Outdoor',
+      textiles: 'Home Textiles & Bath',
+      lighting: 'Lamps & Lighting',
+      kitchen: 'Kitchen & Dining',
+      decor: 'Décor & Seasonal',
+      fashion: 'Bags & Accessories'
+    };
+
+    dirContainer.innerHTML = allCats
+      .map((cat, idx) => {
+        const num = String(idx + 1).padStart(2, '0');
+        const subs = Array.isArray(cat.subcategories) ? cat.subcategories : [];
+        const groupLabel = groupLabels[cat.group] || 'Export Category';
+        return `
+        <div
+          id="category-${idx + 1}"
+          class="bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-blue-300 transition-all overflow-hidden flex flex-col justify-between group"
+        >
+          <div>
+            <!-- Category Image Header -->
+            <div class="relative h-48 overflow-hidden bg-slate-100">
+              <img
+                src="${escapeHtml(cat.image)}"
+                alt="${escapeHtml(cat.title)} — Xporus International Product Line"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+                width="420"
+                height="220"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/75 via-slate-900/20 to-transparent"></div>
+              <div class="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between">
+                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/95 text-blue-700 shadow-xs">
+                  ${escapeHtml(groupLabel)}
+                </span>
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-600 text-white text-xs font-semibold tabular-nums shadow-sm">
+                  ${num}
+                </span>
+              </div>
+              <div class="absolute bottom-3.5 left-4 right-4">
+                <h3 class="text-lg font-semibold text-white font-heading tracking-wide" style="color: #FFFFFF !important;">
+                  ${escapeHtml(cat.title)}
+                </h3>
+              </div>
+            </div>
+
+            <!-- Subcategory Checklist -->
+            <div class="p-6">
+              <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+                <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                  Available Subcategories (${subs.length})
+                </span>
+                <span class="text-[11px] font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
+                  Custom OEM / ODM
+                </span>
+              </div>
+              <ul class="space-y-2 text-xs sm:text-sm text-slate-600">
+                ${subs
+                  .map(
+                    (sub) => `
+                  <li class="flex items-start gap-2">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-blue-600 shrink-0 mt-0.5"></i>
+                    <span>${escapeHtml(sub)}</span>
+                  </li>
+                `
+                  )
+                  .join('')}
+              </ul>
+            </div>
+          </div>
+
+          <!-- Action Footer -->
+          <div class="px-6 pb-6 pt-2">
+            <button
+              type="button"
+              data-cat-title="Category: ${escapeHtml(cat.title)}"
+              class="dir-cat-inquire-btn w-full py-2.5 px-4 rounded-xl bg-blue-50 hover:bg-blue-600 text-blue-700 hover:text-white text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
+            >
+              <span>Request ${escapeHtml(cat.title)} Catalog &amp; Quote</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      `;
+      })
+      .join('');
+
+    dirContainer.querySelectorAll('.dir-cat-inquire-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        openQuoteModal(btn.getAttribute('data-cat-title'));
+      });
+    });
   }
 
   /* ==========================================================================
