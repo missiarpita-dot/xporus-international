@@ -498,68 +498,34 @@ document.addEventListener('DOMContentLoaded', () => {
         class="bg-white rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-lg hover:border-blue-300/90 transition-all duration-200 overflow-hidden flex flex-col justify-between group"
       >
         <div>
-          <!-- Product Image + SKU & Category Badges -->
+          <!-- Product Image -->
           <div
             class="relative h-60 overflow-hidden bg-slate-100 cursor-pointer open-prd-spec-btn"
             data-product-id="${escapeHtml(prd.id)}"
           >
             <img
               src="${escapeHtml(prd.image)}"
-              alt="${escapeHtml(prd.title)} — ${escapeHtml(prd.sku)}"
+              alt="${escapeHtml(prd.title)}"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
               width="420"
               height="260"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/55 via-transparent to-transparent opacity-80"></div>
-            <div class="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between gap-2">
-              <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/95 text-blue-700 shadow-xs">
-                ${escapeHtml(prd.category)}
-              </span>
-              <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold bg-slate-900/85 text-white tracking-wider uppercase">
-                ${escapeHtml(prd.sku)}
-              </span>
-            </div>
-            <div class="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between text-[11px] text-white font-medium">
-              <span class="inline-flex items-center gap-1 bg-slate-900/70 backdrop-blur-xs px-2.5 py-1 rounded-full">
-                <i data-lucide="map-pin" class="w-3 h-3 text-blue-300"></i>
-                <span>${escapeHtml(prd.origin)}</span>
-              </span>
-              <span class="inline-flex items-center gap-1 bg-blue-600/90 px-2.5 py-1 rounded-full text-[10px] font-semibold">
-                Export Ready
-              </span>
-            </div>
           </div>
 
-          <!-- Product Info & Technical Specs -->
-          <div class="p-6">
-            <h3 class="text-lg font-semibold text-slate-900 font-heading mb-2 group-hover:text-blue-600 transition-colors leading-snug">
+          <!-- Product Title Only -->
+          <div class="p-5 pb-3">
+            <h3
+              data-product-id="${escapeHtml(prd.id)}"
+              class="open-prd-spec-btn text-base sm:text-lg font-semibold text-slate-900 font-heading group-hover:text-blue-600 transition-colors leading-snug cursor-pointer"
+            >
               ${escapeHtml(prd.title)}
             </h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-              ${escapeHtml(prd.shortDesc)}
-            </p>
-
-            <!-- Structured Specification Table -->
-            <div class="bg-slate-50/90 rounded-xl p-3.5 border border-slate-200/70 space-y-2 text-xs">
-              <div class="flex items-start justify-between gap-2 border-b border-slate-200/60 pb-1.5">
-                <span class="text-slate-500 font-medium shrink-0">Material:</span>
-                <span class="text-slate-800 font-medium text-right">${escapeHtml(prd.material)}</span>
-              </div>
-              <div class="flex items-start justify-between gap-2 border-b border-slate-200/60 pb-1.5">
-                <span class="text-slate-500 font-medium shrink-0">Specs / Size:</span>
-                <span class="text-slate-800 font-medium text-right">${escapeHtml(prd.dimensions)}</span>
-              </div>
-              <div class="flex items-center justify-between gap-2">
-                <span class="text-slate-500 font-medium shrink-0">MOQ:</span>
-                <span class="text-blue-700 font-semibold text-right">${escapeHtml(prd.moq)}</span>
-              </div>
-            </div>
           </div>
         </div>
 
         <!-- Product Card Action Footer -->
-        <div class="px-6 pb-6 pt-1 flex items-center gap-2.5">
+        <div class="px-5 pb-5 pt-2 flex items-center gap-2.5">
           <button
             type="button"
             data-product-id="${escapeHtml(prd.id)}"
