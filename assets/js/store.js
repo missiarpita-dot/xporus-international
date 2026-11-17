@@ -803,6 +803,36 @@ const DEFAULT_CMS_DATA = {
 };
 
 const XporusStore = {
+  dbConnected: false,
+  dbName: 'xporus_db',
+
+  async syncFromDatabase() {
+    try {
+      const res = await fetch('api/cms.php?action=get_all', {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
+        cache: 'no-store'
+      });
+      if (!res.ok) return null;
+      const json = await res.json();
+      if (json && json.ok && json.data) {
+        this.dbConnected = true;
+        this.dbName = json.database || 'xporus_db';
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(json.data));
+        window.dispatchEvent(
+          new CustomEvent('xporus-cms-updated', {
+            detail: json.data
+          })
+        );
+        return json.data;
+      }
+    } catch (err) {
+      // Fallback to localStorage when running on static host without PHP/MySQL
+      this.dbConnected = false;
+    }
+    return null;
+  },
+
   getData() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -817,7 +847,7 @@ const XporusStore = {
         services: parsed.services || DEFAULT_CMS_DATA.services,
         categories: parsed.categories || DEFAULT_CMS_DATA.categories,
         products:
-          Array.isArray(parsed.products) && parsed.products.length >= 36
+          Array.isArray(parsed.products) && parsed.products.length > 0
             ? parsed.products
             : DEFAULT_CMS_DATA.products,
         team: parsed.team || DEFAULT_CMS_DATA.team,
@@ -834,6 +864,14 @@ const XporusStore = {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(newData));
       window.dispatchEvent(new CustomEvent('xporus-cms-updated', { detail: newData }));
+
+      // Persist asynchronously to MySQL Database via PHP API
+      fetch('api/cms.php?action=save_all', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newData)
+      }).catch(() => {});
+
       return true;
     } catch (err) {
       console.error('Error saving CMS data:', err);
@@ -844,6 +882,13 @@ const XporusStore = {
   resetToDefault() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_CMS_DATA));
     window.dispatchEvent(new CustomEvent('xporus-cms-updated', { detail: DEFAULT_CMS_DATA }));
+
+    fetch('api/cms.php?action=reset_default', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({})
+    }).catch(() => {});
+
     return JSON.parse(JSON.stringify(DEFAULT_CMS_DATA));
   },
 
@@ -861,7 +906,15 @@ const XporusStore = {
       createdAt: new Date().toISOString().slice(0, 16).replace('T', ' ')
     };
     data.inquiries.unshift(newEntry);
-    this.saveData(data);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    window.dispatchEvent(new CustomEvent('xporus-cms-updated', { detail: data }));
+
+    fetch('api/cms.php?action=add_inquiry', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newEntry)
+    }).catch(() => {});
+
     return newEntry;
   },
 
@@ -874,10 +927,19 @@ const XporusStore = {
         email,
         date: new Date().toISOString().slice(0, 10)
       });
-      this.saveData(data);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      window.dispatchEvent(new CustomEvent('xporus-cms-updated', { detail: data }));
     }
+
+    fetch('api/cms.php?action=add_subscriber', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    }).catch(() => {});
+
     return true;
   }
 };
 
 window.XporusStore = XporusStore;
+window.XporusStore.syncFromDatabase();

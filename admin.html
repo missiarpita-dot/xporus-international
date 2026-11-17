@@ -188,6 +188,17 @@
 
           <button
             type="button"
+            data-tab="products"
+            class="admin-nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-slate-800/80 hover:text-white transition-all"
+          >
+            <span class="flex items-center gap-2.5">
+              <i data-lucide="package" class="w-4 h-4"></i>
+              <span>All Products Catalog</span>
+            </span>
+          </button>
+
+          <button
+            type="button"
             data-tab="team"
             class="admin-nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-300 hover:bg-slate-800/80 hover:text-white transition-all"
           >
@@ -252,9 +263,13 @@
         </div>
 
         <div class="flex items-center gap-3">
+          <span id="db-connection-badge" class="inline-flex px-3 py-1.5 rounded-lg bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold items-center gap-1.5">
+            <i data-lucide="database" class="w-3.5 h-3.5"></i>
+            <span id="db-connection-text">MySQL DB: xporus_db</span>
+          </span>
           <span id="admin-save-indicator" class="hidden px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold items-center gap-1.5">
             <i data-lucide="check-circle-2" class="w-4 h-4"></i>
-            <span>Changes Saved Live!</span>
+            <span>Saved to MySQL Database!</span>
           </span>
           <a
             href="index.html"
@@ -505,6 +520,30 @@
             </div>
 
             <div id="admin-categories-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             TAB 5B: ALL INDIVIDUAL PRODUCTS MANAGER (products.html Catalog)
+             ================================================================== -->
+        <section id="tab-products" class="admin-tab-panel hidden space-y-6">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900 font-heading">All Individual Products Manager (MySQL `products` Table)</h3>
+                <p class="text-xs text-slate-500">Add, edit, or delete individual products displayed on products.html and Quick Specs modal</p>
+              </div>
+              <button
+                id="add-product-btn"
+                type="button"
+                class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold flex items-center gap-1.5"
+              >
+                <i data-lucide="plus" class="w-4 h-4"></i>
+                <span>Add New Product</span>
+              </button>
+            </div>
+
+            <div id="admin-products-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
           </div>
         </section>
 

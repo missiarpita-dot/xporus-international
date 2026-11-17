@@ -51,12 +51,17 @@ document.addEventListener('DOMContentLoaded', () => {
     renderAllAdminViews();
   }
 
-  // Listen for live frontend inquiries while Admin Panel is open
+  // Listen for live frontend inquiries or MySQL sync while Admin Panel is open
   window.addEventListener('storage', (e) => {
-    if (e.key === 'xporus_international_cms_v1') {
+    if (e.key === 'xporus_international_cms_v2') {
       cmsData = window.XporusStore.getData();
       renderAllAdminViews();
     }
+  });
+
+  window.addEventListener('xporus-cms-updated', () => {
+    cmsData = window.XporusStore.getData();
+    renderAllAdminViews();
   });
 
   /* ==========================================================================
@@ -68,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     hero: 'Hero, Stats & Corporate Contact Settings',
     services: 'Services Section Manager (6 Core Services)',
     categories: 'Product Categories Manager (Medoc 3D Flip-Cards)',
+    products: 'All Individual Products Manager (MySQL Database)',
     team: 'Leadership & Co-Founders Team Manager',
     testimonials: 'Client Testimonials Carousel Manager',
     settings: 'Newsletter Subscribers & Database Backup'
@@ -102,11 +108,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderAllAdminViews() {
     cmsData = window.XporusStore.getData();
+    const dbBadgeTxt = document.getElementById('db-connection-text');
+    if (dbBadgeTxt) {
+      dbBadgeTxt.textContent = window.XporusStore.dbConnected
+        ? `MySQL Live: ${window.XporusStore.dbName}`
+        : 'MySQL Ready (xporus_db)';
+    }
     renderDashboard();
     renderInquiriesCRM();
     renderHeroAndSettingsForm();
     renderServicesManager();
     renderCategoriesManager();
+    renderProductsManager();
     renderTeamManager();
     renderTestimonialsManager();
     renderSubscribersAndBackup();
@@ -571,6 +584,176 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         if (isNew) cmsData.categories.push(updated);
         else cmsData.categories[idx] = updated;
+        window.XporusStore.saveData(cmsData);
+        showSaveToast();
+        renderAllAdminViews();
+      }
+    );
+  }
+
+  /* ==========================================================================
+     5B. All Individual Products Manager (MySQL `products` Table)
+     ========================================================================== */
+  function renderProductsManager() {
+    const list = document.getElementById('admin-products-list');
+    if (!list) return;
+
+    list.innerHTML = (cmsData.products || [])
+      .map(
+        (prd, idx) => `
+      <div class="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-xs flex flex-col justify-between">
+        <div>
+          <div class="h-36 bg-slate-100 relative">
+            <img src="${escapeHtml(prd.image)}" alt="${escapeHtml(prd.title)}" class="w-full h-full object-cover" loading="lazy" />
+            <span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded text-[10px] font-bold bg-blue-600 text-white">
+              ${escapeHtml(prd.category)}
+            </span>
+            <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded text-[10px] font-bold bg-slate-900/85 text-white">
+              ${escapeHtml(prd.sku)}
+            </span>
+          </div>
+          <div class="p-4">
+            <h4 class="text-sm font-bold text-slate-900 font-heading mb-1">${escapeHtml(prd.title)}</h4>
+            <p class="text-[11px] text-slate-500"><strong>Material:</strong> ${escapeHtml(prd.material)}</p>
+            <p class="text-[11px] text-slate-500"><strong>MOQ:</strong> ${escapeHtml(prd.moq)} • ${escapeHtml(prd.origin)}</p>
+          </div>
+        </div>
+        <div class="px-4 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold text-slate-500">Key: ${escapeHtml(prd.categoryKey)}</span>
+          <div class="flex items-center gap-2.5">
+            <button type="button" data-edit-prd="${idx}" class="edit-prd-btn text-xs font-bold text-blue-600 hover:underline">Edit</button>
+            <button type="button" data-del-prd="${idx}" class="del-prd-btn text-xs font-semibold text-red-600 hover:underline">Delete</button>
+          </div>
+        </div>
+      </div>
+    `
+      )
+      .join('');
+
+    list.querySelectorAll('.edit-prd-btn').forEach((btn) => {
+      btn.addEventListener('click', () => openProductEditor(Number(btn.getAttribute('data-edit-prd'))));
+    });
+    list.querySelectorAll('.del-prd-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const idx = Number(btn.getAttribute('data-del-prd'));
+        cmsData.products.splice(idx, 1);
+        window.XporusStore.saveData(cmsData);
+        showSaveToast();
+        renderAllAdminViews();
+      });
+    });
+  }
+
+  document.getElementById('add-product-btn')?.addEventListener('click', () => openProductEditor(-1));
+
+  function openProductEditor(idx) {
+    const isNew = idx === -1;
+    const prd = isNew
+      ? {
+          id: 'prd-' + Date.now(),
+          sku: 'XP-NEW-101',
+          title: '',
+          category: 'Furniture',
+          categoryKey: 'furniture',
+          material: 'Solid Mango Wood',
+          dimensions: 'Standard Export Size',
+          moq: '50 Pcs',
+          origin: 'Jodhpur Cluster',
+          image: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=800&q=80',
+          shortDesc: ''
+        }
+      : cmsData.products[idx];
+
+    const catOptions = [
+      { key: 'furniture', label: 'Furniture' },
+      { key: 'lighting', label: 'Lamps & Lighting' },
+      { key: 'textiles', label: 'Home Textiles' },
+      { key: 'kitchen', label: 'Kitchen & Dining' },
+      { key: 'decor', label: 'Home Décor & Accessories' },
+      { key: 'bath', label: 'Bath Collection' },
+      { key: 'fashion', label: 'Bags & Accessories' },
+      { key: 'outdoor', label: 'Outdoor Living' },
+      { key: 'rugs', label: 'Cushions & Rugs' },
+      { key: 'seasonal', label: 'Seasonal & Christmas' },
+      { key: 'kids', label: 'Kids & Nursery' },
+      { key: 'hardware', label: 'Home Improvement & DIY' }
+    ];
+
+    openUniversalModal(
+      isNew ? 'Add New Product to MySQL Catalog' : `Edit Product: ${prd.title}`,
+      `
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Product Title *</label>
+          <input name="title" required value="${escapeHtml(prd.title)}" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">SKU Code *</label>
+          <input name="sku" required value="${escapeHtml(prd.sku)}" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm" />
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Category *</label>
+          <select name="categoryKey" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white">
+            ${catOptions
+              .map(
+                (o) =>
+                  `<option value="${o.key}" ${prd.categoryKey === o.key ? 'selected' : ''}>${escapeHtml(
+                    o.label
+                  )}</option>`
+              )
+              .join('')}
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Origin Cluster *</label>
+          <input name="origin" required value="${escapeHtml(prd.origin)}" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm" />
+        </div>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-slate-700 mb-1">Product Image URL *</label>
+        <input name="image" required value="${escapeHtml(prd.image)}" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm" />
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Material Spec *</label>
+          <input name="material" required value="${escapeHtml(prd.material)}" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">MOQ *</label>
+          <input name="moq" required value="${escapeHtml(prd.moq)}" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm" />
+        </div>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-slate-700 mb-1">Dimensions / Options *</label>
+        <input name="dimensions" required value="${escapeHtml(prd.dimensions)}" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm" />
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-slate-700 mb-1">Quick Specs Description *</label>
+        <textarea name="shortDesc" rows="2" required class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm">${escapeHtml(
+          prd.shortDesc
+        )}</textarea>
+      </div>
+    `,
+      (formData) => {
+        const selectedKey = formData.get('categoryKey');
+        const foundCat = catOptions.find((c) => c.key === selectedKey);
+        const updated = {
+          ...prd,
+          title: formData.get('title').trim(),
+          sku: formData.get('sku').trim(),
+          categoryKey: selectedKey,
+          category: foundCat ? foundCat.label : prd.category,
+          origin: formData.get('origin').trim(),
+          image: formData.get('image').trim(),
+          material: formData.get('material').trim(),
+          moq: formData.get('moq').trim(),
+          dimensions: formData.get('dimensions').trim(),
+          shortDesc: formData.get('shortDesc').trim()
+        };
+        if (isNew) cmsData.products.push(updated);
+        else cmsData.products[idx] = updated;
         window.XporusStore.saveData(cmsData);
         showSaveToast();
         renderAllAdminViews();
