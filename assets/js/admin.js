@@ -362,22 +362,41 @@ document.addEventListener('DOMContentLoaded', () => {
     list.innerHTML = (cmsData.services || [])
       .map(
         (srv, idx) => `
-      <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/60 flex flex-col justify-between gap-4">
+      <div class="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-xs flex flex-col justify-between">
         <div>
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-100 text-blue-800">
-              Service #${idx + 1} • Icon: ${escapeHtml(srv.icon)}
+          <div class="h-36 bg-slate-100 relative">
+            <img
+              src="${escapeHtml(srv.image || 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1000&q=85')}"
+              alt="${escapeHtml(srv.title)}"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <span class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-600 text-white shadow-xs">
+              Service #${String(idx + 1).padStart(2, '0')} • Icon: ${escapeHtml(srv.icon)}
             </span>
-            <div class="flex items-center gap-2">
-              <button type="button" data-edit-srv="${idx}" class="edit-srv-btn text-xs font-bold text-blue-600 hover:underline">Edit</button>
-              <button type="button" data-del-srv="${idx}" class="del-srv-btn text-xs font-semibold text-red-600 hover:underline">Delete</button>
+          </div>
+          <div class="p-5">
+            <h4 class="text-base font-bold text-slate-900 font-heading">${escapeHtml(srv.title)}</h4>
+            <p class="text-xs text-slate-500 mt-1"><strong>Homepage Summary:</strong> ${escapeHtml(srv.shortDesc)}</p>
+            <p class="text-xs text-slate-600 mt-2 line-clamp-2"><strong>Services Page Detail:</strong> ${escapeHtml(srv.fullDesc || srv.shortDesc)}</p>
+            <div class="flex flex-wrap gap-1.5 mt-2.5">
+              ${(srv.deliverables || [])
+                .map(
+                  (d) =>
+                    `<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-100">${escapeHtml(
+                      d
+                    )}</span>`
+                )
+                .join('')}
             </div>
           </div>
-          <h4 class="text-base font-bold text-slate-900 font-heading">${escapeHtml(srv.title)}</h4>
-          <p class="text-xs text-slate-600 mt-1">${escapeHtml(srv.shortDesc)}</p>
-          <p class="text-[11px] text-slate-500 mt-2 bg-white p-2.5 rounded-lg border border-slate-200/80">
-            <strong>Case Study:</strong> ${escapeHtml(srv.caseStudy || 'N/A')}
-          </p>
+        </div>
+        <div class="px-5 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold text-slate-500">Syncs: Homepage + Services Page</span>
+          <div class="flex items-center gap-3">
+            <button type="button" data-edit-srv="${idx}" class="edit-srv-btn text-xs font-bold text-blue-600 hover:underline">Edit</button>
+            <button type="button" data-del-srv="${idx}" class="del-srv-btn text-xs font-semibold text-red-600 hover:underline">Delete</button>
+          </div>
         </div>
       </div>
     `
@@ -409,37 +428,44 @@ document.addEventListener('DOMContentLoaded', () => {
           shortDesc: '',
           fullDesc: '',
           icon: 'briefcase',
+          image: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1000&q=85',
           caseStudy: '',
           deliverables: ['Strategic Planning', 'Compliance Audit']
         }
       : cmsData.services[idx];
 
     openUniversalModal(
-      isNew ? 'Add New Service' : `Edit Service: ${srv.title}`,
+      isNew ? 'Add New Service (Homepage + Services Page)' : `Edit Service: ${srv.title}`,
       `
       <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1">Service Title *</label>
+        <label class="block text-xs font-semibold text-slate-700 mb-1">Service Title (Homepage &amp; Services Page) *</label>
         <input name="title" required value="${escapeHtml(srv.title)}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm" />
       </div>
-      <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1">Lucide Icon Name (briefcase, trending-up, globe, search, shield-check, truck)</label>
-        <input name="icon" required value="${escapeHtml(srv.icon)}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm" />
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Lucide Icon Name *</label>
+          <input name="icon" required value="${escapeHtml(srv.icon)}" placeholder="briefcase, globe, truck..." class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Services Page Image URL *</label>
+          <input name="image" required value="${escapeHtml(srv.image || 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1000&q=85')}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm" />
+        </div>
       </div>
       <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1">Card Short Description *</label>
+        <label class="block text-xs font-semibold text-slate-700 mb-1">Homepage Card Short Description *</label>
         <input name="shortDesc" required value="${escapeHtml(srv.shortDesc)}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm" />
       </div>
       <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1">Detailed Modal Description</label>
-        <textarea name="fullDesc" rows="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm">${escapeHtml(srv.fullDesc)}</textarea>
+        <label class="block text-xs font-semibold text-slate-700 mb-1">Services Page Detailed Description *</label>
+        <textarea name="fullDesc" rows="3" required class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm">${escapeHtml(srv.fullDesc || srv.shortDesc)}</textarea>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-slate-700 mb-1">Key Deliverables (Comma-separated) *</label>
+        <input name="deliverables" required value="${escapeHtml((srv.deliverables || []).join(', '))}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm" />
       </div>
       <div>
         <label class="block text-xs font-semibold text-slate-700 mb-1">Case Study Highlight</label>
         <textarea name="caseStudy" rows="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm">${escapeHtml(srv.caseStudy)}</textarea>
-      </div>
-      <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1">Key Deliverables (Comma-separated)</label>
-        <input name="deliverables" value="${escapeHtml((srv.deliverables || []).join(', '))}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm" />
       </div>
     `,
       (formData) => {
@@ -447,6 +473,9 @@ document.addEventListener('DOMContentLoaded', () => {
           ...srv,
           title: formData.get('title').trim(),
           icon: formData.get('icon').trim() || 'briefcase',
+          image:
+            formData.get('image').trim() ||
+            'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1000&q=85',
           shortDesc: formData.get('shortDesc').trim(),
           fullDesc: formData.get('fullDesc').trim(),
           caseStudy: formData.get('caseStudy').trim(),
@@ -678,6 +707,19 @@ document.addEventListener('DOMContentLoaded', () => {
       { key: 'kids', label: 'Kids & Nursery' },
       { key: 'hardware', label: 'Home Improvement & DIY' }
     ];
+
+    (cmsData.categories || []).forEach((c) => {
+      const slug = (c.title || '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+      const existsByLabel = catOptions.some(
+        (o) => o.label.toLowerCase() === (c.title || '').toLowerCase()
+      );
+      if (slug && !existsByLabel && !catOptions.some((o) => o.key === slug)) {
+        catOptions.push({ key: slug, label: c.title });
+      }
+    });
 
     openUniversalModal(
       isNew ? 'Add New Product to MySQL Catalog' : `Edit Product: ${prd.title}`,

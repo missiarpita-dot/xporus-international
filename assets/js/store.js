@@ -31,57 +31,63 @@ const DEFAULT_CMS_DATA = {
   services: [
     {
       id: 'srv-1',
-      title: 'Consultancy Service',
-      shortDesc: 'Strategic business advice and growth planning.',
-      fullDesc: 'We provide comprehensive strategic business consulting to help international retailers, wholesalers, and D2C brands establish resilient sourcing roadmaps and scale sustainably across global markets.',
+      title: 'Consultancy Service & Product Development',
+      shortDesc: 'Strategic business advice, product development, and growth planning.',
+      fullDesc: 'We provide strategic business advice, sourcing roadmaps, and supplier portfolio optimization across 50+ factories in India. Through our dedicated Design & Development team, we also provide complete end-to-end support to move your chosen product concepts from initial design sketches and material sampling into full container-scale production.',
       icon: 'briefcase',
+      image: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1000&q=85',
       caseStudy: 'Guided a US-based multi-store home retailer in restructuring their Indian vendor portfolio, achieving a 22% cost reduction within two quarters.',
-      deliverables: ['Market Entry Strategy', 'Supplier Portfolio Optimization', 'Cost-Benefit Restructuring', 'Long-Term Growth Roadmap']
+      deliverables: ['Strategic Sourcing Roadmap', 'Design & Full Development', 'Supplier Portfolio Optimization', 'Cost-Benefit Restructuring']
     },
     {
       id: 'srv-2',
-      title: 'Business Advisory',
+      title: 'Business Advisory & Compliance Audits',
       shortDesc: 'Financial forecasting, risk management, and operational efficiency.',
-      fullDesc: 'Our advisory practice delivers data-backed financial forecasting, supply chain risk mitigation, and factory floor operational efficiency audits tailored for high-volume cross-border trade.',
+      fullDesc: 'Our advisory practice delivers financial forecasting, risk management, and operational efficiency for international buyers. Under Compliance Audits, we promote global standards for social accountability and environmental practices in India—working alongside the Government of India and its member bodies to help exporters achieve certification in Global Best Practices (GBP).',
       icon: 'trending-up',
+      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=85',
       caseStudy: 'Negotiated favorable multi-year pricing agreements and hedging structures for a European distributor, protecting margins against raw material fluctuations.',
-      deliverables: ['Financial & Margin Forecasting', 'Supply Chain Risk Audits', 'Vendor Contract Negotiation', 'Operational Bottleneck Removal']
+      deliverables: ['Global Best Practices (GBP)', 'Social & Environmental Audits', 'Financial & Margin Forecasting', 'Supply Chain Risk Mitigation']
     },
     {
       id: 'srv-3',
-      title: 'Export & Import Services',
+      title: 'Export & Import Services & Merchandising',
       shortDesc: 'Global trade solutions, customs clearance, and supply chain management.',
-      fullDesc: 'End-to-end export-import execution covering vendor liaison, HS code classification, letter of credit (LC) documentation, customs clearance, and seamless international trade compliance.',
+      fullDesc: 'Our merchandisers source products to your exact specifications. Every project is assigned a dedicated two-member team to maintain continuous communication and follow-ups between buyers and factories. Combined with proactive Order Management, we provide regular updates throughout the entire production process along with customs clearance and trade compliance.',
       icon: 'globe',
+      image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1000&q=85',
       caseStudy: 'Managed end-to-end export compliance and customs documentation for 85+ forty-foot containers of handcrafted furniture & textiles across the US, UK, and EU.',
-      deliverables: ['Customs & Regulatory Clearance', 'End-to-End Supply Chain Execution', 'Duty & Tariff Optimization', 'Multi-Vendor Consolidation']
+      deliverables: ['Dedicated 2-Member Merchandising Team', 'Live Order Management Updates', 'Customs & Export Documentation']
     },
     {
       id: 'srv-4',
-      title: 'Market Research',
+      title: 'Market Research & Analytics',
       shortDesc: 'Target market analysis, competitor benchmarking, and consumer trends.',
-      fullDesc: 'Deep-dive global market intelligence, material trend forecasting, competitor price benchmarking, and regional manufacturing capability mapping across India and South Asia.',
+      fullDesc: 'Deep-dive target market analysis, competitor price benchmarking, and global consumer trend forecasting. Operating across 4 regional offices in key Indian production cities, our specialists map raw material availability, artisanal craft clusters, and factory capabilities to keep your seasonal collections ahead of market demand.',
       icon: 'search',
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=85',
       caseStudy: 'Delivered a seasonal trend & material feasibility study for a UK lifestyle brand, resulting in a bestselling sustainable jute & acacia wood collection.',
-      deliverables: ['Competitor Price Benchmarking', 'Raw Material & Artisanal Mapping', 'Global Consumer Trend Reports', 'Factory Capability Assessments']
+      deliverables: ['Competitor Price Benchmarking', 'Artisanal & Material Cluster Mapping', 'Seasonal Consumer Trend Reports']
     },
     {
       id: 'srv-5',
-      title: 'Quality Assurance',
+      title: 'Quality Assurance (3-Stage Inspections)',
       shortDesc: 'Product inspection, compliance verification, and standard maintenance.',
-      fullDesc: 'At Xporus International, quality is non-negotiable. Our on-ground QA engineers conduct rigorous inline, mid-production, and pre-shipment quality inspections alongside thorough product testing.',
+      fullDesc: 'Our QA team averages over 10 years of trade experience. We establish pre-production checklists with factory supervisory teams and conduct a minimum of three inspection stages (Pre-Production, Inline, and Pre-Shipment) for all shipments. Our expertise includes production planning, forecasting, vendor evaluation, and social compliance and packaging audits.',
       icon: 'shield-check',
+      image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=85',
       caseStudy: 'Identified and rectified finish defects during inline inspection for a 12,000-unit US furniture & lighting order, ensuring 100% defect-free on-time delivery.',
-      deliverables: ['Pre-Shipment Quality Inspections', 'Production Standard Verification', 'Inline Factory Floor Audits', 'Safety & Durability Testing']
+      deliverables: ['Minimum 3 Inspection Stages', 'Pre-Production Checklists', 'Vendor Evaluation & Packaging Audits']
     },
     {
       id: 'srv-6',
-      title: 'Logistics Management',
+      title: 'Logistics Management (Door-to-Door)',
       shortDesc: 'Freight forwarding, warehousing, and international shipping coordination.',
-      fullDesc: 'We take the complexity out of international shipping by coordinating ocean/air freight forwarding, bonded warehousing, packaging optimization, and real-time container tracking.',
+      fullDesc: 'We handle consolidation planning, export documentation, and real-time cargo tracking through to final delivery. Backed by a production capacity exceeding 100+ containers per month across 50+ factories, we operate as a vertically integrated company managing the complete process from factory shipping to final door delivery.',
       icon: 'truck',
+      image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=85',
       caseStudy: 'Consolidated shipments from 9 artisan clusters in Rajasthan and UP into synchronized FOB & DDP deliveries for a leading Australian retail chain.',
-      deliverables: ['Ocean & Air Freight Forwarding', 'Multi-Cluster Warehousing', 'Transit Packaging Engineering', 'FOB / CIF / DDP Coordination']
+      deliverables: ['Multi-Cluster Consolidation Planning', 'Documentation & Cargo Tracking', 'Vertically Integrated Door Delivery']
     }
   ],
 

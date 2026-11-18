@@ -46,6 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderHeroAndSettings();
     renderMetricsBar();
     renderServicesGrid();
+    renderServicesPageList();
+    renderFooterServicesLinks();
     renderProductCategories();
     renderAllProductsCatalog();
     renderLeadershipTeam();
@@ -245,13 +247,154 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ==========================================================================
+     3B. Render Services Individual Page Sequential Zig-Zag Showcase (services.html)
+     ========================================================================== */
+  function renderServicesPageList() {
+    const container = document.getElementById('services-page-list');
+    if (!container) return;
+
+    const defaultServiceImages = [
+      'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1000&q=85',
+      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=85',
+      'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1000&q=85',
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=85',
+      'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=85',
+      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=85'
+    ];
+
+    const services = cmsData.services || [];
+    if (services.length === 0) {
+      container.innerHTML = `
+        <div class="p-12 text-center text-slate-500 text-sm">
+          No services configured. Add services in the Admin Panel.
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = services
+      .map((srv, idx) => {
+        const num = String(idx + 1).padStart(2, '0');
+        const isEvenRow = idx % 2 === 1; // 0-based: idx 0 is row 1 (image left), idx 1 is row 2 (image right)
+        const imgUrl = srv.image || defaultServiceImages[idx % defaultServiceImages.length];
+        const deliverables = Array.isArray(srv.deliverables) ? srv.deliverables : [];
+        const fullParagraph = srv.fullDesc || srv.shortDesc || '';
+
+        const imageCol = `
+          <div class="lg:col-span-6 bg-slate-100 min-h-[280px] sm:min-h-[340px] relative overflow-hidden ${
+            isEvenRow ? 'order-1 lg:order-2' : ''
+          }">
+            <img
+              src="${escapeHtml(imgUrl)}"
+              alt="${num}. ${escapeHtml(srv.title)} — Xporus International"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        `;
+
+        const contentCol = `
+          <div class="lg:col-span-6 p-7 sm:p-10 lg:p-12 flex flex-col justify-center space-y-4 ${
+            isEvenRow ? 'order-2 lg:order-1' : ''
+          }">
+            <div class="flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800 tabular-nums shrink-0">
+                ${num}
+              </span>
+              <h2 class="text-xl sm:text-2xl font-semibold text-slate-900 font-heading">
+                ${escapeHtml(srv.title)}
+              </h2>
+            </div>
+
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+              ${escapeHtml(fullParagraph)}
+            </p>
+
+            ${
+              deliverables.length
+                ? `
+              <div class="flex flex-wrap items-center gap-2 pt-1">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200/80">
+                  Deliverables:
+                </span>
+                ${deliverables
+                  .map(
+                    (d) => `
+                  <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                    ${escapeHtml(d)}
+                  </span>
+                `
+                  )
+                  .join('')}
+              </div>
+            `
+                : ''
+            }
+
+            <div class="pt-2">
+              <button
+                type="button"
+                data-srv-quote="Service: ${escapeHtml(srv.title)}"
+                class="srv-page-quote-btn inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-sm shadow-blue-600/20 transition-all"
+              >
+                <span>Request Service Quote</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        `;
+
+        return `
+          <article id="service-${idx + 1}" class="grid grid-cols-1 lg:grid-cols-12 items-stretch scroll-mt-24">
+            ${isEvenRow ? contentCol + imageCol : imageCol + contentCol}
+          </article>
+        `;
+      })
+      .join('');
+
+    container.querySelectorAll('.srv-page-quote-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        openQuoteModal(btn.getAttribute('data-srv-quote'));
+      });
+    });
+  }
+
+  /* ==========================================================================
+     3C. Dynamically Sync Footer "Core Services" Links Across All Pages
+     ========================================================================== */
+  function renderFooterServicesLinks() {
+    const firstSrvLink = document.querySelector('footer ul a[href^="services.html#service-"]');
+    if (!firstSrvLink) return;
+    const ul = firstSrvLink.closest('ul');
+    if (!ul) return;
+
+    ul.innerHTML = (cmsData.services || [])
+      .map(
+        (srv, idx) => `
+        <li>
+          <a href="services.html#service-${idx + 1}" class="hover:text-white transition-colors">
+            ${escapeHtml(srv.title)}
+          </a>
+        </li>
+      `
+      )
+      .join('');
+  }
+
+  /* ==========================================================================
      4. Render Medoc Sourcing Style 3D Flip-Box Product Categories + Live Search
      ========================================================================== */
   function renderProductCategories() {
     const grid = document.getElementById('categories-grid');
     if (!grid) return;
 
-    let filtered = cmsData.categories || [];
+    const allCats = cmsData.categories || [];
+    const allBtn = document.querySelector('.cat-filter-btn[data-filter="all"]');
+    if (allBtn) {
+      allBtn.textContent = `All Categories (${allCats.length})`;
+    }
+
+    let filtered = allCats;
 
     // Apply Search Query Filter if present
     if (currentCategorySearch.trim() !== '') {
@@ -491,6 +634,59 @@ document.addEventListener('DOMContentLoaded', () => {
       { key: 'kids', num: '11', label: 'Kids & Nursery', desc: 'Rattan & solid wood nursery cribs, organic muslin playmats, and braided cotton toy storage.' },
       { key: 'hardware', num: '12', label: 'Home Improvement & DIY', desc: 'Knurled solid brass cabinet hardware, Jaipur blue pottery knobs, and cast-iron shelf kits.' }
     ];
+
+    // Also include any custom categoryKey added via Admin Panel
+    allProducts.forEach((p) => {
+      if (p.categoryKey && !categoryOrder.some((c) => c.key === p.categoryKey)) {
+        categoryOrder.push({
+          key: p.categoryKey,
+          num: String(categoryOrder.length + 1).padStart(2, '0'),
+          label: p.category || p.categoryKey,
+          desc: `Export-ready ${p.category || p.categoryKey} crafted across our Indian manufacturing clusters.`
+        });
+      }
+    });
+
+    // Dynamically update filter pills with live product counts
+    const pillsWrap = document.getElementById('product-filter-pills');
+    if (pillsWrap) {
+      const activeCats = categoryOrder.filter((c) => allProducts.some((p) => p.categoryKey === c.key));
+      pillsWrap.innerHTML = [
+        `<button
+          type="button"
+          data-prod-filter="all"
+          class="${
+            currentProductFilter === 'all'
+              ? 'prod-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-blue-600 text-white shadow-xs border border-transparent transition-all'
+              : 'prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all'
+          }"
+        >
+          All Products (${allProducts.length})
+        </button>`,
+        ...activeCats.map((c) => {
+          const catCount = allProducts.filter((p) => p.categoryKey === c.key).length;
+          const isAct = currentProductFilter === c.key;
+          return `<button
+            type="button"
+            data-prod-filter="${escapeHtml(c.key)}"
+            class="${
+              isAct
+                ? 'prod-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-blue-600 text-white shadow-xs border border-transparent transition-all'
+                : 'prod-filter-btn px-3.5 py-2 rounded-full text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-300 transition-all'
+            }"
+          >
+            ${escapeHtml(c.label)} (${catCount})
+          </button>`;
+        })
+      ].join('');
+
+      pillsWrap.querySelectorAll('.prod-filter-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          currentProductFilter = btn.getAttribute('data-prod-filter') || 'all';
+          renderAllProductsCatalog();
+        });
+      });
+    }
 
     const renderProductCard = (prd) => `
       <article
@@ -881,8 +1077,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const selects = document.querySelectorAll('.inquiry-interest-select');
     const options = [
       'General Sourcing & Business Consultation',
-      ...cmsData.services.map((s) => `Service: ${s.title}`),
-      ...cmsData.categories.map((c) => `Category: ${c.title}`)
+      ...(cmsData.services || []).map((s) => `Service: ${s.title}`),
+      ...(cmsData.categories || []).map((c) => `Category: ${c.title}`),
+      ...(cmsData.products || []).map((p) => `Product: ${p.title} (${p.sku})`)
     ];
 
     selects.forEach((sel) => {

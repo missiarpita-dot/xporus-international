@@ -70,11 +70,18 @@ function ensure_schema_exists(PDO $pdo): void {
             `short_desc` TEXT NOT NULL,
             `full_desc` TEXT NOT NULL,
             `icon` VARCHAR(64) NOT NULL DEFAULT 'briefcase',
+            `image` TEXT NOT NULL,
             `case_study` TEXT NOT NULL,
             `deliverables_json` TEXT NOT NULL,
             `sort_order` INT NOT NULL DEFAULT 0
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
     ");
+    try {
+        $cols = $pdo->query("SHOW COLUMNS FROM `services` LIKE 'image'")->fetchAll();
+        if (count($cols) === 0) {
+            $pdo->exec("ALTER TABLE `services` ADD COLUMN `image` TEXT NOT NULL AFTER `icon`");
+        }
+    } catch (Throwable $e) {}
 
     // 4. Product Categories Table (Medoc 3D Flip-Cards)
     $pdo->exec("

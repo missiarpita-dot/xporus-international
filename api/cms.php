@@ -135,6 +135,7 @@ function fetch_all_cms_data(PDO $pdo): array {
             'shortDesc' => $row['short_desc'],
             'fullDesc' => $row['full_desc'],
             'icon' => $row['icon'],
+            'image' => $row['image'] ?? '',
             'caseStudy' => $row['case_study'],
             'deliverables' => json_decode($row['deliverables_json'], true) ?: []
         ];
@@ -278,8 +279,8 @@ function save_all_cms_data(PDO $pdo, array $data): void {
         if (isset($data['services']) && is_array($data['services'])) {
             $pdo->exec("DELETE FROM `services`");
             $stmt = $pdo->prepare("
-                INSERT INTO `services` (`id`, `title`, `short_desc`, `full_desc`, `icon`, `case_study`, `deliverables_json`, `sort_order`)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO `services` (`id`, `title`, `short_desc`, `full_desc`, `icon`, `image`, `case_study`, `deliverables_json`, `sort_order`)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             ");
             foreach (array_values($data['services']) as $idx => $s) {
                 $stmt->execute([
@@ -288,6 +289,7 @@ function save_all_cms_data(PDO $pdo, array $data): void {
                     $s['shortDesc'] ?? '',
                     $s['fullDesc'] ?? '',
                     $s['icon'] ?? 'briefcase',
+                    $s['image'] ?? 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1000&q=85',
                     $s['caseStudy'] ?? '',
                     json_encode($s['deliverables'] ?? [], JSON_UNESCAPED_UNICODE),
                     $idx + 1
