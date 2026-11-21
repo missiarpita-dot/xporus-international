@@ -349,75 +349,8 @@
           </p>
         </div>
 
-        <!-- UI/UX Pro Max: Category Filter Pills + Live Subcategory Search -->
-        <div class="flex flex-col lg:flex-row items-center justify-between gap-4 mb-10 bg-slate-50/90 p-3 rounded-2xl border border-slate-200/80">
-          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2">
-            <button
-              type="button"
-              data-filter="featured"
-              class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm border border-transparent transition-all"
-            >
-              Core 8 Categories
-            </button>
-            <button
-              type="button"
-              data-filter="all"
-              class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:border-blue-300 transition-all"
-            >
-              All Categories (12)
-            </button>
-            <button
-              type="button"
-              data-filter="furniture"
-              class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:border-blue-300 transition-all"
-            >
-              Furniture &amp; Outdoor
-            </button>
-            <button
-              type="button"
-              data-filter="textiles"
-              class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:border-blue-300 transition-all"
-            >
-              Home Textiles &amp; Bath
-            </button>
-            <button
-              type="button"
-              data-filter="lighting"
-              class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:border-blue-300 transition-all"
-            >
-              Lamps &amp; Lighting
-            </button>
-            <button
-              type="button"
-              data-filter="kitchen"
-              class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:border-blue-300 transition-all"
-            >
-              Kitchen &amp; Dining
-            </button>
-            <button
-              type="button"
-              data-filter="decor"
-              class="cat-filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:border-blue-300 transition-all"
-            >
-              Décor &amp; Seasonal
-            </button>
-          </div>
-
-          <!-- Instant Subcategory Search Input -->
-          <div class="relative w-full lg:w-64 shrink-0">
-            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-            <input
-              id="category-search-input"
-              type="search"
-              placeholder="Search products (e.g. rugs, brass)..."
-              aria-label="Search Product Categories"
-              class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none"
-            />
-          </div>
-        </div>
-
-        <!-- 4x2 (or 4x3) Medoc Sourcing Style 3D Flip-Box Grid -->
-        <div id="categories-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Medoc Sourcing Style 3D Flip-Box Grid -->
+        <div id="categories-grid" data-default-filter="all" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <!-- Dynamically populated by main.js -->
         </div>
       </div>
