@@ -510,7 +510,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
               <a
                 href="products.html#cat-${escapeHtml(anchorKey)}"
-                class="cat-explore-link w-full mt-3 py-2 px-3 rounded-lg bg-white text-blue-700 hover:bg-blue-50 text-xs font-bold text-center transition-colors flex items-center justify-center gap-1.5 shadow-sm"
+                data-target-url="products.html#cat-${escapeHtml(anchorKey)}"
+                class="cat-explore-link relative z-30 w-full mt-3 py-2 px-3 rounded-lg bg-white text-blue-700 hover:bg-blue-50 text-xs font-bold text-center transition-colors flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
               >
                 <span>Explore Products</span>
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
@@ -522,10 +523,26 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .join('');
 
+    // Explicit click handler on Explore Products button
+    grid.querySelectorAll('.cat-explore-link').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const url = link.getAttribute('data-target-url') || link.getAttribute('href');
+        if (url) {
+          window.location.href = url;
+        }
+      });
+    });
+
     // Support tap-to-flip on touch devices & keyboard Enter/Space
     grid.querySelectorAll('.flip-card').forEach((card) => {
       card.addEventListener('click', (e) => {
-        if (e.target.closest('.cat-explore-link')) return;
+        const exploreBtn = e.target.closest('.cat-explore-link');
+        if (exploreBtn) {
+          const url = exploreBtn.getAttribute('data-target-url') || exploreBtn.getAttribute('href');
+          if (url) window.location.href = url;
+          return;
+        }
         card.classList.toggle('is-flipped');
       });
       card.addEventListener('keydown', (e) => {

@@ -173,6 +173,20 @@ p, li, dd, blockquote, input, textarea, select {
   padding: 1.35rem 1.5rem;
   box-shadow: 0 22px 36px -10px rgba(29, 78, 216, 0.38);
   border: 1px solid rgba(147, 197, 253, 0.28);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.flip-card:hover .flip-card-front,
+.flip-card.is-flipped .flip-card-front {
+  pointer-events: none;
+  z-index: 0;
+}
+
+.flip-card:hover .flip-card-back,
+.flip-card.is-flipped .flip-card-back {
+  pointer-events: auto;
+  z-index: 20;
 }
 
 /* Pro Max Service Card Hover Physics & Top Accent Bar */
