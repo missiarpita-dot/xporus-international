@@ -432,9 +432,31 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    const getCategoryAnchorKey = (cat) => {
+      const t = (cat.title || '').toUpperCase();
+      if (t.includes('LAMP') || t.includes('LIGHT')) return 'lighting';
+      if (t.includes('TEXTILE') || t.includes('LINEN')) return 'textiles';
+      if (t.includes('KITCHEN') || t.includes('DINING')) return 'kitchen';
+      if (t.includes('BATH')) return 'bath';
+      if (t.includes('BAG') || t.includes('FASHION') || t.includes('ACCESSOR') && !t.includes('DÉCOR') && !t.includes('DECOR')) return 'fashion';
+      if (t.includes('OUTDOOR') || t.includes('PATIO') || t.includes('GARDEN')) return 'outdoor';
+      if (t.includes('CUSHION') || t.includes('RUG')) return 'rugs';
+      if (t.includes('SEASON') || t.includes('CHRISTMAS') || t.includes('FESTIV')) return 'seasonal';
+      if (t.includes('KID') || t.includes('NURSERY')) return 'kids';
+      if (t.includes('IMPROVEMENT') || t.includes('DIY') || t.includes('HARDWARE')) return 'hardware';
+      if (t.includes('DÉCOR') || t.includes('DECOR')) return 'decor';
+      if (t.includes('FURNITURE')) return 'furniture';
+      const slug = (cat.title || '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+      return slug || cat.group || 'furniture';
+    };
+
     grid.innerHTML = filtered
       .map((cat) => {
         const subs = Array.isArray(cat.subcategories) ? cat.subcategories : [];
+        const anchorKey = getCategoryAnchorKey(cat);
         return `
         <div class="flip-card" tabindex="0" aria-label="${escapeHtml(cat.title)} Category Card">
           <div class="flip-card-inner">
@@ -460,7 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </div>
 
-            <!-- BACK PANEL (Medoc Style Subcategory Checklist + Quick Inquiry) -->
+            <!-- BACK PANEL (Medoc Style Subcategory Checklist + Smart Redirect to Products Page Section) -->
             <div class="flip-card-back">
               <div>
                 <div class="flex items-center justify-between border-b border-white/20 pb-2.5 mb-3">
@@ -486,14 +508,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 </ul>
               </div>
 
-              <button
-                type="button"
-                data-cat-title="Category: ${escapeHtml(cat.title)}"
-                class="cat-inquire-btn w-full mt-3 py-2 px-3 rounded-lg bg-white text-blue-700 hover:bg-blue-50 text-xs font-bold text-center transition-colors flex items-center justify-center gap-1.5 shadow-sm"
+              <a
+                href="products.html#cat-${escapeHtml(anchorKey)}"
+                class="cat-explore-link w-full mt-3 py-2 px-3 rounded-lg bg-white text-blue-700 hover:bg-blue-50 text-xs font-bold text-center transition-colors flex items-center justify-center gap-1.5 shadow-sm"
               >
-                <span>Request Catalog &amp; Quote</span>
-                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-              </button>
+                <span>Explore Products</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -504,7 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Support tap-to-flip on touch devices & keyboard Enter/Space
     grid.querySelectorAll('.flip-card').forEach((card) => {
       card.addEventListener('click', (e) => {
-        if (e.target.closest('.cat-inquire-btn')) return;
+        if (e.target.closest('.cat-explore-link')) return;
         card.classList.toggle('is-flipped');
       });
       card.addEventListener('keydown', (e) => {
@@ -512,13 +533,6 @@ document.addEventListener('DOMContentLoaded', () => {
           e.preventDefault();
           card.classList.toggle('is-flipped');
         }
-      });
-    });
-
-    grid.querySelectorAll('.cat-inquire-btn').forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        openQuoteModal(btn.getAttribute('data-cat-title'));
       });
     });
 
@@ -802,6 +816,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (window.lucide) window.lucide.createIcons();
+
+    // Smart hash scroll when redirected from Homepage category card (e.g. products.html#cat-lighting)
+    if (window.location.hash && window.location.hash.startsWith('#cat-')) {
+      const targetEl = document.querySelector(window.location.hash);
+      if (targetEl && !targetEl.hasAttribute('data-scrolled')) {
+        targetEl.setAttribute('data-scrolled', 'true');
+        setTimeout(() => {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 120);
+      }
+    }
   }
 
   function initAllProductsSearchAndFilters() {
