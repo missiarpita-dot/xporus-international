@@ -18,7 +18,9 @@ const DEFAULT_CMS_DATA = {
     address: 'Plot No. 18, Heavy Industrial Area, Jodhpur, Rajasthan 342003, India',
     phone: '+91 291 274 8890 / +91 98290 56789',
     email: 'contact@xporusinternational.com',
-    linkedin: 'https://www.linkedin.com/company/xporus-international/'
+    linkedin: 'https://www.linkedin.com/company/xporus-international/',
+    adminEmail: 'admin@xporusinternational.com',
+    adminPassword: 'xporus2026'
   },
 
   metrics: [

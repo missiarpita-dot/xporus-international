@@ -24,12 +24,38 @@ document.addEventListener('DOMContentLoaded', () => {
     unlockAdmin();
   }
 
+  document.getElementById('toggle-login-pass-btn')?.addEventListener('click', () => {
+    const passInput = document.getElementById('login-password');
+    if (passInput) {
+      passInput.type = passInput.type === 'password' ? 'text' : 'password';
+    }
+  });
+
   if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
+    loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+      cmsData = window.XporusStore.getData();
       const email = document.getElementById('login-email').value.trim().toLowerCase();
       const pass = document.getElementById('login-password').value.trim();
-      if (email === 'admin@xporusinternational.com' && pass === 'xporus2026') {
+
+      let validEmail = (cmsData.settings?.adminEmail || 'admin@xporusinternational.com')
+        .trim()
+        .toLowerCase();
+      let validPass = (cmsData.settings?.adminPassword || 'xporus2026').trim();
+
+      if (email !== validEmail || pass !== validPass) {
+        // Also try refreshing from MySQL database in case credentials were updated on the server
+        const synced = await window.XporusStore.syncFromDatabase();
+        if (synced && synced.settings) {
+          cmsData = window.XporusStore.getData();
+          validEmail = (cmsData.settings?.adminEmail || 'admin@xporusinternational.com')
+            .trim()
+            .toLowerCase();
+          validPass = (cmsData.settings?.adminPassword || 'xporus2026').trim();
+        }
+      }
+
+      if (email === validEmail && pass === validPass) {
         sessionStorage.setItem(AUTH_KEY, 'true');
         loginError.classList.add('hidden');
         unlockAdmin();
@@ -1029,9 +1055,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ==========================================================================
-     8. Subscribers & JSON Backup / Factory Reset
+     8. Admin Account Credentials, Subscribers & JSON Backup / Factory Reset
      ========================================================================== */
   function renderSubscribersAndBackup() {
+    const activeEmail = cmsData.settings?.adminEmail || 'admin@xporusinternational.com';
+    const badgeEl = document.getElementById('current-admin-email-badge');
+    if (badgeEl) badgeEl.textContent = activeEmail;
+
+    const emailInput = document.getElementById('cred-new-email');
+    if (emailInput && !emailInput.matches(':focus')) {
+      emailInput.value = activeEmail;
+    }
+
     const ul = document.getElementById('admin-subscribers-list');
     if (!ul) return;
     const subs = cmsData.subscribers || [];
@@ -1048,6 +1083,56 @@ document.addEventListener('DOMContentLoaded', () => {
           .join('')
       : `<li class="py-4 text-slate-400">No subscribers yet.</li>`;
   }
+
+  document.getElementById('admin-credentials-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const newEmail = document.getElementById('cred-new-email').value.trim();
+    const curPass = document.getElementById('cred-current-password').value.trim();
+    const newPass = document.getElementById('cred-new-password').value.trim();
+    const confirmPass = document.getElementById('cred-confirm-password').value.trim();
+    const feedbackEl = document.getElementById('cred-feedback-msg');
+
+    const storedPass = (cmsData.settings?.adminPassword || 'xporus2026').trim();
+
+    const showFeedback = (msg, isError) => {
+      if (!feedbackEl) return;
+      feedbackEl.textContent = msg;
+      feedbackEl.className = isError
+        ? 'text-xs font-semibold px-3.5 py-2.5 rounded-xl bg-red-50 text-red-700 border border-red-200'
+        : 'text-xs font-semibold px-3.5 py-2.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200';
+      feedbackEl.classList.remove('hidden');
+    };
+
+    if (curPass !== storedPass) {
+      showFeedback('Current password is incorrect. Please enter your existing password.', true);
+      return;
+    }
+
+    if (newPass.length < 4) {
+      showFeedback('New password must be at least 4 characters long.', true);
+      return;
+    }
+
+    if (newPass !== confirmPass) {
+      showFeedback('New password and Confirm password do not match!', true);
+      return;
+    }
+
+    cmsData.settings.adminEmail = newEmail;
+    cmsData.settings.adminPassword = newPass;
+    window.XporusStore.saveData(cmsData);
+    showSaveToast();
+
+    document.getElementById('cred-current-password').value = '';
+    document.getElementById('cred-new-password').value = '';
+    document.getElementById('cred-confirm-password').value = '';
+    renderSubscribersAndBackup();
+
+    showFeedback(
+      `✓ Admin login credentials updated! New Email: ${newEmail} (Saved to MySQL Database)`,
+      false
+    );
+  });
 
   document.getElementById('export-json-btn')?.addEventListener('click', () => {
     const blob = new Blob([JSON.stringify(cmsData, null, 2)], { type: 'application/json' });
