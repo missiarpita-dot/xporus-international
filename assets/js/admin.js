@@ -75,6 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
     loginScreen.classList.add('hidden');
     appShell.classList.remove('hidden');
     renderAllAdminViews();
+    if (window.location.hash === '#password' || window.location.hash === '#settings') {
+      setTimeout(() => {
+        document.querySelector('[data-tab="settings"]')?.click();
+      }, 50);
+    }
   }
 
   // Listen for live frontend inquiries or MySQL sync while Admin Panel is open

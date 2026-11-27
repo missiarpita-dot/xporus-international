@@ -1167,6 +1167,93 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.lucide) window.lucide.createIcons();
   }
 
+  function generateCaptchaCode() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let code = '';
+    for (let i = 0; i < 5; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
+  }
+
+  function attachCaptchaToForm(formEl) {
+    if (!formEl || formEl.querySelector('.xporus-captcha-wrap')) return;
+    const submitBtn = formEl.querySelector('button[type="submit"]');
+    if (!submitBtn) return;
+
+    const wrap = document.createElement('div');
+    wrap.className = 'xporus-captcha-wrap pt-1';
+    wrap.innerHTML = `
+      <label class="block text-xs font-medium text-slate-700 mb-1.5">Security Verification (Captcha) *</label>
+      <div class="flex items-center gap-2.5">
+        <div
+          class="captcha-code-box select-none px-4 py-2.5 rounded-xl bg-slate-100 border border-slate-300 text-slate-800 font-heading font-semibold text-sm tracking-[0.28em] flex items-center justify-center min-w-[120px] shadow-2xs"
+          style="background-image: repeating-linear-gradient(45deg, rgba(37,99,235,0.05) 0px, rgba(37,99,235,0.05) 6px, transparent 6px, transparent 12px);"
+          aria-label="Captcha Security Code"
+        ></div>
+        <button
+          type="button"
+          class="captcha-refresh-btn p-2.5 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-600 hover:text-blue-600 transition-colors shrink-0"
+          title="Refresh Captcha Code"
+          aria-label="Refresh Captcha Code"
+        >
+          <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+        </button>
+        <input
+          type="text"
+          name="captcha_input"
+          required
+          autocomplete="off"
+          placeholder="Enter code"
+          class="captcha-user-input w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm uppercase tracking-wider focus:ring-2 focus:ring-blue-600 outline-none"
+        />
+      </div>
+      <p class="captcha-error-msg hidden text-xs text-red-600 font-medium mt-1.5">
+        Invalid captcha code. Please enter the exact code shown.
+      </p>
+    `;
+
+    formEl.insertBefore(wrap, submitBtn);
+
+    const refreshCode = () => {
+      const newCode = generateCaptchaCode();
+      formEl.setAttribute('data-captcha-answer', newCode);
+      const codeBox = wrap.querySelector('.captcha-code-box');
+      if (codeBox) codeBox.textContent = newCode;
+      const inp = wrap.querySelector('.captcha-user-input');
+      if (inp) inp.value = '';
+      const err = wrap.querySelector('.captcha-error-msg');
+      if (err) err.classList.add('hidden');
+    };
+
+    wrap.querySelector('.captcha-refresh-btn')?.addEventListener('click', refreshCode);
+    formEl._refreshCaptcha = refreshCode;
+    refreshCode();
+    if (window.lucide) window.lucide.createIcons();
+  }
+
+  function validateFormCaptcha(formEl) {
+    const expected = (formEl.getAttribute('data-captcha-answer') || '').trim().toUpperCase();
+    const inputEl = formEl.querySelector('.captcha-user-input');
+    const errEl = formEl.querySelector('.captcha-error-msg');
+    if (!inputEl) return true;
+
+    const entered = inputEl.value.trim().toUpperCase();
+    if (!expected || entered !== expected) {
+      if (errEl) errEl.classList.remove('hidden');
+      const newCode = generateCaptchaCode();
+      formEl.setAttribute('data-captcha-answer', newCode);
+      const codeBox = formEl.querySelector('.captcha-code-box');
+      if (codeBox) codeBox.textContent = newCode;
+      inputEl.value = '';
+      inputEl.focus();
+      return false;
+    }
+
+    if (errEl) errEl.classList.add('hidden');
+    return true;
+  }
+
   function openQuoteModal(preselectedInterest) {
     const modal = document.getElementById('quote-modal');
     if (!modal) return;
@@ -1181,6 +1268,11 @@ document.addEventListener('DOMContentLoaded', () => {
         select.prepend(opt);
       }
       select.value = preselectedInterest;
+    }
+
+    const modalForm = document.getElementById('quote-modal-form');
+    if (modalForm && typeof modalForm._refreshCaptcha === 'function') {
+      modalForm._refreshCaptcha();
     }
 
     document.getElementById('quote-modal-form-wrap').classList.remove('hidden');
@@ -1215,8 +1307,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const modalForm = document.getElementById('quote-modal-form');
     if (modalForm) {
+      attachCaptchaToForm(modalForm);
       modalForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        if (!validateFormCaptcha(modalForm)) return;
+
         const formData = new FormData(modalForm);
         window.XporusStore.addInquiry({
           name: formData.get('name'),
@@ -1227,6 +1322,7 @@ document.addEventListener('DOMContentLoaded', () => {
           message: formData.get('message')
         });
         modalForm.reset();
+        if (typeof modalForm._refreshCaptcha === 'function') modalForm._refreshCaptcha();
         document.getElementById('quote-modal-form-wrap').classList.add('hidden');
         document.getElementById('quote-modal-success').classList.remove('hidden');
       });
@@ -1234,8 +1330,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const contactForm = document.getElementById('page-contact-form');
     if (contactForm) {
+      attachCaptchaToForm(contactForm);
       contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        if (!validateFormCaptcha(contactForm)) return;
+
         const formData = new FormData(contactForm);
         window.XporusStore.addInquiry({
           name: formData.get('name'),
@@ -1246,6 +1345,7 @@ document.addEventListener('DOMContentLoaded', () => {
           message: formData.get('message')
         });
         contactForm.reset();
+        if (typeof contactForm._refreshCaptcha === 'function') contactForm._refreshCaptcha();
         const toast = document.getElementById('contact-form-toast');
         if (toast) {
           toast.classList.remove('hidden');
