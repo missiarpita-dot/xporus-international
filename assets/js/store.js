@@ -15,9 +15,9 @@ const DEFAULT_CMS_DATA = {
     heroSubtext: 'Your premier end-to-end global trade partner specializing in strategic business consulting, custom product development, audited factory supply chains, and export excellence.',
     heroPrimaryCta: 'Explore Services',
     heroSecondaryCta: 'Contact Us',
-    address: 'Plot No. 18, Heavy Industrial Area, Jodhpur, Rajasthan 342003, India',
-    phone: '+91 291 274 8890 / +91 98290 56789',
-    email: 'contact@xporusinternational.com',
+    address: 'Plot no. 73 A, 11 A Road, Sardarpura, Jodhpur',
+    phone: '+91 86900 87873',
+    email: 'info@xporusinternational.com',
     linkedin: 'https://www.linkedin.com/company/xporus-international/',
     adminEmail: 'admin@xporusinternational.com',
     adminPassword: 'xporus2026'
@@ -849,8 +849,18 @@ const XporusStore = {
         return JSON.parse(JSON.stringify(DEFAULT_CMS_DATA));
       }
       const parsed = JSON.parse(raw);
+      const mergedSettings = { ...DEFAULT_CMS_DATA.settings, ...(parsed.settings || {}) };
+      if (mergedSettings.address && mergedSettings.address.includes('Plot No. 18')) {
+        mergedSettings.address = DEFAULT_CMS_DATA.settings.address;
+      }
+      if (mergedSettings.phone && mergedSettings.phone.includes('274 8890')) {
+        mergedSettings.phone = DEFAULT_CMS_DATA.settings.phone;
+      }
+      if (mergedSettings.email === 'contact@xporusinternational.com') {
+        mergedSettings.email = DEFAULT_CMS_DATA.settings.email;
+      }
       return {
-        settings: { ...DEFAULT_CMS_DATA.settings, ...(parsed.settings || {}) },
+        settings: mergedSettings,
         metrics: parsed.metrics || DEFAULT_CMS_DATA.metrics,
         services: parsed.services || DEFAULT_CMS_DATA.services,
         categories: parsed.categories || DEFAULT_CMS_DATA.categories,
